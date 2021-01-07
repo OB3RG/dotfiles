@@ -14,7 +14,7 @@ rm -rf "$DOTFILES"
 mkdir "$DOTFILES"
 cd "$DOTFILES" || exit
 
-git clone git@github.com:OB3RG/arch_dotfiles.git $DOTFILES
+git clone git@github.com:OB3RG/dotfiles.git $DOTFILES
 
 rm -rf \
   "$DOTFZF" \
