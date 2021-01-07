@@ -1,0 +1,28 @@
+[alias]
+  co = checkout
+  cob = checkout -b
+
+  br = branch
+  brd = branch -d
+
+  c = commit -m
+
+  #oneline log
+  l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+
+  s = status -s
+
+
+[format]
+  pretty = "%H %ci %ce %ae %d %s"
+
+
+[user]
+	email = oberg.oskar@gmail.com
+	name = Oskar Oberg
+[push]
+	default = simple
+[core]
+	editor = vim
+[pull]
+	rebase = true

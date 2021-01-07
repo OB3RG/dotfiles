@@ -1,0 +1,32 @@
+add_newline = false
+
+format = """
+$env_var\
+$username\
+$directory\
+$git_branch\
+$cmd_duration \
+$character
+"""
+
+
+[username]
+stype_user = "green bold"
+style_root = "green bold"
+format = "[$user]($style)@ "
+disabled = true
+show_always = true
+
+[directory]
+style = "#fa7d09 bold"
+
+[env_var]
+variable = "VIRTUAL_ENV"
+style = "bright-white dimmed"
+format = "\\(env\\)"
+
+[cmd_duration]
+min_time = 4
+show_milliseconds = false
+disabled = false
+style = "bold italic #87A752"
