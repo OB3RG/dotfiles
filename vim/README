@@ -1,5 +1,0 @@
-This is my Vim config.
-
-
-When setting up new env if necessary 
-echo "runtime vimrc" > .vimrc

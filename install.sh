@@ -21,9 +21,7 @@ rm -rf \
   "$DOTLOCAL" \
   "$HOME/.bashrc" \
   "$HOME/.gitconfig" \
-  "$HOME/.eslintrc.js" \
   "$HOME/.zshrc" \
-  "$HOME/.vim" \
   "$HOME/.config/starship.toml"
 
 
@@ -34,8 +32,6 @@ ln -s "$DOTFILES/bashrc" "$HOME/.bashrc"
 ln -s "$DOTFILES/gitconfig" "$HOME/.gitconfig"
 ln -s "$DOTFILES/zshrc" "$HOME/.zshrc"
 ln -s "$DOTFILES/gitconfig" "$HOME/.gitconfig"
-ln -s "$DOTFILES/eslintrc.js" "$HOME/.eslintrc.js"
-ln -s "$DOTFILES/vim" "$HOME/.vim"
 ln -s "$DOTFILES/starship.toml" "$HOME/.config/starship.toml"
 
 $GITCLONE https://github.com/junegunn/fzf.git "$DOTFZF"
