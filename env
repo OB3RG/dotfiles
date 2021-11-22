@@ -3,6 +3,6 @@ export EDITOR=vi
 export KEYTIMEOUT=1
 
 export GOPATH=$HOME/go
-export GO111MODULE=auto
+export GO111MODULE=on
 
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin

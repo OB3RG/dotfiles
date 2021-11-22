@@ -22,7 +22,8 @@ rm -rf \
   "$HOME/.bashrc" \
   "$HOME/.gitconfig" \
   "$HOME/.zshrc" \
-  "$HOME/.config/starship.toml"
+  "$HOME/.config/starship.toml" \
+  "$HOME/.config/nvim"
 
 
 mkdir -p \
@@ -33,6 +34,7 @@ ln -s "$DOTFILES/gitconfig" "$HOME/.gitconfig"
 ln -s "$DOTFILES/zshrc" "$HOME/.zshrc"
 ln -s "$DOTFILES/gitconfig" "$HOME/.gitconfig"
 ln -s "$DOTFILES/starship.toml" "$HOME/.config/starship.toml"
+ln -s "$DOTFILES/nvim" "$HOME/.config/nvim"
 
 $GITCLONE https://github.com/junegunn/fzf.git "$DOTFZF"
 "$DOTFZF/install" --key-bindings --completion --no-update-rc

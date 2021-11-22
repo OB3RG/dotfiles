@@ -1,0 +1,31 @@
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+
+call plug#begin("~/.local/share/nvim/site/plugged")
+    "Apperance
+    Plug 'morhetz/gruvbox'
+    Plug 'itchyny/lightline.vim'
+
+    " Language stuff
+    Plug 'hashivim/vim-terraform'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'fatih/vim-go', { 'do': ':silent :GoUpdateBinaries'}
+    Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+
+    "" Elixir
+    Plug 'elixir-editors/vim-elixir'
+    Plug 'mhinz/vim-mix-format'
+
+    "Fuzzy search
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
+    Plug 'rking/ag.vim'
+
+    " Misc
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'scrooloose/nerdtree'
+call plug#end()
+
