@@ -13,7 +13,8 @@ call plug#begin("~/.local/share/nvim/site/plugged")
     Plug 'hashivim/vim-terraform'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'fatih/vim-go', { 'do': ':silent :GoUpdateBinaries'}
-    Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+    Plug 'sbdchd/neoformat'
+    Plug 'rust-lang/rust.vim'
 
     "" Elixir
     Plug 'elixir-editors/vim-elixir'

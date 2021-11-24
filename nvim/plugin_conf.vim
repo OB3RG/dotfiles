@@ -38,10 +38,13 @@ nnoremap <silent> <leader>c{ V{:call NERDComment(‘x’, ‘toggle’)<CR>
 
 " CoC
 let g:coc_global_extensions = [
+    \ 'coc-snippets',
     \ 'coc-pairs',
     \ 'coc-json',
+    \ 'coc-rls',
     \ 'coc-elixir',
     \ 'coc-tsserver',
+    \ 'coc-pyright'
 \]
 
 set signcolumn=yes
@@ -112,8 +115,5 @@ let g:terraform_fmt_on_save=1
 let g:mix_format_on_save = 1
 let g:mix_format_silent_errors = 1
 
-" Prettier
-" when running at every change you may want to disable quickfix
-let g:prettier#quickfix_enabled = 0
-
-autocmd TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+" Neoformat
+autocmd BufWritePre,TextChanged,InsertLeave *.js Neoformat

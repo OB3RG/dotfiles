@@ -20,3 +20,14 @@ nnoremap <A-l> <C-W>L
 " NERDTree
 nnoremap <Leader>f :NERDTreeToggle<Enter>
 nnoremap <silent> <Leader>v :NERDTreeFind<CR>
+
+" Fzf
+nnoremap <C-p> :FzfGFiles<CR>
+nnoremap <C-C> :FzfAg<CR>
+nnoremap <C-b> :FzfBuffers<CR>
+
+" Misc
+nnoremap <Leader>w <C-w>q
+
+"Clear search highlight
+nnoremap <Leader><Space> :noh<CR>
