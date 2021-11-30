@@ -22,3 +22,5 @@ function pp {
 }
 
 alias dka="docker container kill $(docker ps -q)"
+
+alias vim="nvim"

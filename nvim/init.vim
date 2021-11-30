@@ -19,7 +19,7 @@ filetype plugin on
 set cursorline " highlight current cursorline
 set ttyfast " Speed up scrolling in Vim
 set noswapfile " disable creating swap file
-set backupdir=~/.cache/vim " Dir to store backup files
+set backupdir=~/.cache/nvim " Dir to store backup files
 set cmdheight=2
 set shortmess+=c
 set signcolumn=yes

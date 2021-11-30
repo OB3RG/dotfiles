@@ -44,7 +44,6 @@ let g:coc_global_extensions = [
     \ 'coc-rls',
     \ 'coc-elixir',
     \ 'coc-tsserver',
-    \ 'coc-pyright'
 \]
 
 set signcolumn=yes
