@@ -101,4 +101,6 @@ let g:mix_format_on_save = 1
 let g:mix_format_silent_errors = 1
 
 " Neoformat
+let g:neoformat_try_node_exe = 1
 autocmd BufWritePre,TextChanged,InsertLeave *.js Neoformat
+
