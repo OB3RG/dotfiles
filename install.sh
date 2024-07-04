@@ -18,13 +18,13 @@ rm -rf \
   "$HOME/.ssh/config" \
   "$HOME/.gitconfig" \
   "$HOME/.zshrc" \
-  "$DOTCONFIG/lvim" \
+  "$DOTCONFIG/nvim" \
   "$DOTCONFIG/tmux"
 
 ln -s "$DOTFILES/ssh/config" "$HOME/.ssh/config"
 ln -s "$DOTFILES/gitconfig" "$HOME/.gitconfig"
 ln -s "$DOTFILES/zsh/zshrc" "$HOME/.zshrc"
-ln -s "$DOTFILES/config/lvim" "$DOTCONFIG/lvim"
+ln -s "$DOTFILES/config/nvim" "$DOTCONFIG/nvim"
 ln -s "$DOTFILES/config/tmux" "$DOTCONFIG/tmux"
 
 cd "$HOME" || exit
