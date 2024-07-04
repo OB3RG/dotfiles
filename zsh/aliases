@@ -14,5 +14,5 @@ function pp {
 }
 
 #alias dka="docker container kill $(docker ps -q)"
-alias vim=lvim
+alias vim=nvim
 
