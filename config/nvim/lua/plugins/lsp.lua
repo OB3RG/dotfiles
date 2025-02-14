@@ -10,7 +10,7 @@ return {
 				tag = "legacy",
 				event = "LspAttach",
 			},
-			"folke/neodev.nvim",
+			"folke/lazydev.nvim",
 			"RRethy/vim-illuminate",
 			"hrsh7th/cmp-nvim-lsp",
 		},
@@ -20,15 +20,13 @@ return {
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"lua_ls",
+					"gopls",
 				},
 				automatic_installation = true,
 			})
 
 			-- Quick access via keymap
 			require("helpers.keys").map("n", "<leader>M", "<cmd>Mason<cr>", "Show Mason")
-
-			-- Neodev setup before LSP config
-			require("neodev").setup()
 
 			-- Turn on LSP status information
 			require("fidget").setup()
@@ -107,6 +105,22 @@ return {
 								[vim.fn.expand("$VIMRUNTIME/lua")] = true,
 								[vim.fn.stdpath("config") .. "/lua"] = true,
 							},
+						},
+					},
+				},
+			})
+			-- Go
+			require("lspconfig")["gopls"].setup({
+				capabilities = capabilities,
+				on_attach = on_attach,
+				cmd = { "gopls" },
+				filetypes = { "go", "gomod", "gowork", "gotmpl" },
+				settings = {
+					gopls = {
+						completeUnimported = true,
+						usePlaceholders = true,
+						analyses = {
+							unusedparams = true,
 						},
 					},
 				},
