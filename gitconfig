@@ -1,8 +1,9 @@
+[format]
+  pretty = "%H %ci %ce %ae %d %s"
+
 [user]
-	email = oskar.oberg@instabee.com
+	email = oskar@shimayama.io
 	name = Oskar Öberg
-#
-# clearly makes git better
 
 [column]
         ui = auto
@@ -17,6 +18,8 @@
         colorMoved = plain
         mnemonicPrefix = true
         renames = true
+[pull]
+	rebase = true
 [push]
         default = simple
         autoSetupRemote = true
@@ -25,11 +28,6 @@
         prune = true
         pruneTags = true
         all = true
-
-[format]
-  pretty = "%H %ci %ce %ae %d %s"
-
-# why the hell not?
 
 [help]
         autocorrect = prompt
@@ -40,23 +38,9 @@
         autoupdate = true
 [core]
         excludesfile = ~/.gitignore
+        editor = nvim
 [rebase]
         autoSquash = true
         autoStash = true
         updateRefs = true
 
-# a matter of taste (uncomment if you dare)
-
-[core]
-	editor = nvim
-        # fsmonitor = true
-        # untrackedCache = true
-[merge]
-        # (just 'diff3' if git version < 2.3)
-        # conflictstyle = zdiff3 
-[pull]
-	rebase = true
-
-
-[url "ssh://git@github.com/"]
-  insteadOf = https://github.com/

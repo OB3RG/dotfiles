@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 export DOTFILES=$HOME/.dotfiles/zsh
+export ZFILES=$HOME/.zsh
 
 source $DOTFILES/env
 source $DOTFILES/aliases
@@ -56,21 +57,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
 autoload -U compinit && compinit -u
 
-fpath+=($HOME/.zsh/pure)
-autoload -U promptinit; promptinit
-prompt pure
+fpath+=($DOTFILES/zsh/my_prompt)
+source $DOTFILES/my_prompt
 
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+source $ZFILES/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZFILES/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

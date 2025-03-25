@@ -16,5 +16,3 @@ function pp {
 #alias dka="docker container kill $(docker ps -q)"
 alias vim=nvim
 
-
-alias docker-compose=docker compose
