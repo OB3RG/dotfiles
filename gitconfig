@@ -2,7 +2,7 @@
   pretty = "%H %ci %ce %ae %d %s"
 
 [user]
-	email = oskar@shimayama.io
+	email = contact@oskaroberg.com
 	name = Oskar Öberg
 
 [column]
