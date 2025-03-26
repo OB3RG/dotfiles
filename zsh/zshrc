@@ -64,3 +64,4 @@ source $DOTFILES/my_prompt
 
 source $ZFILES/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZFILES/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
