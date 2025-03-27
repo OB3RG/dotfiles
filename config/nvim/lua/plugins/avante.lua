@@ -9,10 +9,14 @@ return {
       -- for example
       provider = "ollama",
       auto_suggestions_provider = "ollama",
-        ollama = {
-          endpoint = "10.25.0.11:11434",
-          model = "granite-code"
-        },
+      ollama = {
+        endpoint = "10.25.0.11:11434",
+        model = "granite-code"
+      },
+      suggestion = {
+        debounce = 300,
+        throttle = 1000
+      },
       cursor_applying_provider = 'ollama', -- In this example, use Groq for applying, but you can also use any provider you want.
       behaviour = {
         enable_cursor_planning_mode = true, -- enable cursor planning mode!
