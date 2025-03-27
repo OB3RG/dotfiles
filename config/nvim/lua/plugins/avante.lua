@@ -16,7 +16,8 @@ return {
       cursor_applying_provider = 'ollama', -- In this example, use Groq for applying, but you can also use any provider you want.
       behaviour = {
         enable_cursor_planning_mode = true, -- enable cursor planning mode!
-          auto_suggestions = true
+        auto_suggestions = true,
+        auto_set_highlight_group = true,
       },
       rag_service = {
         enabled = false, -- Enables the RAG service
