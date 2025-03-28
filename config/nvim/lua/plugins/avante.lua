@@ -20,7 +20,7 @@ return {
       cursor_applying_provider = 'ollama', -- In this example, use Groq for applying, but you can also use any provider you want.
       behaviour = {
         enable_cursor_planning_mode = true, -- enable cursor planning mode!
-        auto_suggestions = true,
+        auto_suggestions = false,
         auto_set_highlight_group = true,
       },
       rag_service = {
@@ -28,7 +28,7 @@ return {
         host_mount = '/home/oberg/Work', -- Host mount path for the rag service
         provider = "ollama", -- The provider to use for RAG service (e.g. openai or ollama)
         llm_model = "granite-code", -- The LLM model to use for RAG service
-        embed_model = "nomic-embeded-text", -- The embedding model to use for RAG service
+        embed_model = "nomic-embed-text", -- The embedding model to use for RAG service
         endpoint = "http://10.25.0.11:11434", -- The API endpoint for RAG service
         runner = "docker"
       },
