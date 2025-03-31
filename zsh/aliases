@@ -16,3 +16,6 @@ function pp {
 #alias dka="docker container kill $(docker ps -q)"
 alias vim=nvim
 
+
+tmux=$(which tmux)
+alias tmux="$tmux -2"
