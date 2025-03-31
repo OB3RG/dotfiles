@@ -22,7 +22,8 @@ rm -rf \
   "$DOTCONFIG/tmux" \
   "$DOTCONFIG/gtk-3.0" \
   "$DOTCONFIG/gtk-4.0" \
-  "$HOME/.zsh"
+  "$HOME/.zsh" \
+  "$HOME/.local/bin"
 
 ln -s "$DOTFILES/ssh/config" "$HOME/.ssh/config"
 ln -s "$DOTFILES/gitconfig" "$HOME/.gitconfig"
@@ -32,6 +33,7 @@ ln -s "$DOTFILES/config/nvim" "$DOTCONFIG/nvim"
 ln -s "$DOTFILES/config/tmux" "$DOTCONFIG/tmux"
 ln -s "$DOTFILES/config/gtk-3.0" "$DOTCONFIG/gtk-3.0"
 ln -s "$DOTFILES/config/gtk-4.0" "$DOTCONFIG/gtk-4.0"
+ln -s "$DOTFILES/local-bin" "$HOME/.local/bin"
 
 cd "$HOME" || exit
 rm -f "${HOME}/.zcompdump*"
