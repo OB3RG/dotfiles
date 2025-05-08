@@ -16,7 +16,7 @@ Generate the FSTAB file with genfstab -U /mnt >> /mnt/etc/FSTAB
 
 Chroot in with arch-chroot /mnt
 
-Download the git repository with git clone https://gitlab.com/ob3rg/dotfiles
+Download the git repository with git clone https://github.com/ob3rg/dotfiles
 
 cd arch-install
 
