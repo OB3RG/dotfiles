@@ -1,3 +1,5 @@
 #!/bin/bash
 
-pacman -S hyprland hyprpaper hypridle hyprlock xdg-desktop-portal-hyprland
+pacman -S --noconfirm hyprland hyprpaper hypridle hyprlock xdg-desktop-portal-hyprland sddm
+
+systemctl enable sddm
