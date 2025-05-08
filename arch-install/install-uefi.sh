@@ -39,7 +39,7 @@ pacman -S --noconfirm archlinux-keyring
 pacman-key --init
 pacman-key --populate archlinux
 
-
 source ./hyprland.sh
+source ./dev.sh
 printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
 
