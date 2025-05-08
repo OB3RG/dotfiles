@@ -14,10 +14,10 @@ echo "127.0.1.1 oberg.localdomain oberg" >> /etc/hosts
 echo root:password | chpasswd
 
 pacman -Syy
-pacman -S --noconfirm grub efibootmgr base-devel linux-headers xdg-usr-dirs xdg-utils openssh reflector acpi acpi_call acpid \
+pacman -S --noconfirm grub efibootmgr base-devel linux-headers xdg-user-dirs xdg-utils openssh reflector acpi acpi_call acpid \
           networkmanager iw wpa_supplicant iputils network-manager-applet \
           alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack pavucontrol \
-          bluez bluez-utils bluetoothctl bluez-firmware \
+          bluez bluez-utils \
           sudo man-db man dialog
 
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB #change the directory to /boot/efi is you mounted the EFI partition at /boot/efi
