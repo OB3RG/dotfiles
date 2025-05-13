@@ -1,4 +1,4 @@
 #!/bin/bash
 
-pacman -S --noconfirm wezterm
+pacman -S --noconfirm alacritty
 
