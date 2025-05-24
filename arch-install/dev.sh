@@ -1,4 +1,4 @@
 #!/bin/bash
 
-pacman -S --noconfirm alacritty
+pacman -S --noconfirm alacritty neovim zsh fzf
 

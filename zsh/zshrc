@@ -41,7 +41,7 @@ bindkey -v
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 
-source /usr/share/fzf/shell/key-bindings.zsh
+source /usr/share/fzf/key-bindings.zsh
 
 export PATH=$PATH:$HOME/.npm-global/bin
 # add user bin to PATH
