@@ -43,20 +43,6 @@ bindkey '^e' end-of-line
 
 source /usr/share/fzf/key-bindings.zsh
 
-export PATH=$PATH:$HOME/.npm-global/bin
-# add user bin to PATH
-export PATH=$PATH:$HOME/bin
-
-# Add local user bin
-export PATH=$PATH:$HOME/.local/bin
-
-#Go path
-export PATH=$PATH:/usr/local/go/bin
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 autoload -U compinit && compinit -u
 
 fpath+=($DOTFILES/zsh/my_prompt)
@@ -65,4 +51,4 @@ source $DOTFILES/my_prompt
 source $ZFILES/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZFILES/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
