@@ -65,3 +65,4 @@ source $DOTFILES/my_prompt
 source $ZFILES/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZFILES/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
