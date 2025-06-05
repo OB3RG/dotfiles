@@ -23,3 +23,11 @@ cd arch-install
 chmod +x install-uefi.sh
 
 run with ./install-uefi.sh
+
+
+
+
+## Post install
+
+systemctl --user enable gcr-ssh-agent.socket
+systemctl --user enable ssh-agent.service
