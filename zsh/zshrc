@@ -41,7 +41,7 @@ bindkey -v
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 
-source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/shell/key-bindings.zsh
 
 autoload -U compinit && compinit -u
 
