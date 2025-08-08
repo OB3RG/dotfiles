@@ -52,3 +52,6 @@ source $ZFILES/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZFILES/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
+
+# Scaleway CLI autocomplete initialization.
+eval "$(scw autocomplete script shell=zsh)"
