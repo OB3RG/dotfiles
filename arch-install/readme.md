@@ -7,8 +7,13 @@ Refresh the servers with pacman -Syy
 Partition the disk
 
 Format the partitions
+mkfs.fat -F 32 /dev/_efi_system_partition_
+mkfs.ext4 /dev/_root_partition_
 
 Mount the partitions
+
+mount /dev/_root_partition_ /mnt
+mount --mkdir /dev/efi_system_partition /mnt/boot
 
 Install the base packages into /mnt (pacstrap /mnt base linux linux-firmware git vim intel-ucode (or amd-ucode))
 
