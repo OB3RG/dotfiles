@@ -22,8 +22,8 @@ rm -rf \
   "$DOTCONFIG/tmux" \
   "$DOTCONFIG/gtk-3.0" \
   "$DOTCONFIG/gtk-4.0" \
-  "$DONTCONFIG/hypr" \
-  "$DONTCONFIG/waybar" \
+  "$DOTCONFIG/hypr" \
+  "$DOTCONFIG/waybar" \
   "$HOME/.zsh" \
   "$HOME/.local/bin" 
 
