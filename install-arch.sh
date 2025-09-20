@@ -18,6 +18,7 @@ rm -rf \
   "$HOME/.ssh/config" \
   "$HOME/.gitconfig" \
   "$HOME/.zshrc" \
+  "$DOTCONFIG/alacritty" \
   "$DOTCONFIG/nvim" \
   "$DOTCONFIG/tmux" \
   "$DOTCONFIG/gtk-3.0" \
@@ -32,6 +33,7 @@ ln -s "$DOTFILES/ssh/config" "$HOME/.ssh/config"
 ln -s "$DOTFILES/gitconfig" "$HOME/.gitconfig"
 ln -s "$DOTFILES/zsh/zshrc" "$HOME/.zshrc"
 ln -s "$DOTFILES/zsh/plugins" "$HOME/.zsh"
+ln -s "$DOTFILES/config/alacritty" "$DOTCONFIG/alacritty"
 ln -s "$DOTFILES/config/nvim" "$DOTCONFIG/nvim"
 ln -s "$DOTFILES/config/tmux" "$DOTCONFIG/tmux"
 ln -s "$DOTFILES/config/gtk-3.0" "$DOTCONFIG/gtk-3.0"

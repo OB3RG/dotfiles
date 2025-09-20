@@ -2,6 +2,7 @@ export CLICOLOR=1
 export EDITOR=nvim
 export VISUAL=nvim
 export KEYTIMEOUT=1
+export TERMINAL=alacritty
 
 export GOPATH=$HOME/go
 export GO111MODULE=on
