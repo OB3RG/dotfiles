@@ -45,8 +45,7 @@
   },
   "cpu": {
     "interval": 5,
-    "format": "󰍛",
-    "on-click": "$TERMINAL -e btop"
+    "format": "󰍛"
   },
   "clock": {
     "format": "{:L%A %H:%M}",
@@ -88,11 +87,10 @@
     "format-disabled": "󰂲",
     "format-connected": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "blueberry"
+    "on-click": "blueman-manager"
   },
     "pulseaudio": {
     "format": "{icon}",
-    //"on-click": "$TERMINAL --class=Wiremix -e wiremix",
     "on-click": "pavucontrol",
     "tooltip-format": "Playing at {volume}%",
     "scroll-step": 5,
