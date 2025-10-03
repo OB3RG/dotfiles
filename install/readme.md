@@ -28,8 +28,7 @@ Download the git repository with git clone https://github.com/ob3rg/dotfiles
 
 cd install
 
-For standard installation: chmod +x install-uefi.sh && ./install-uefi.sh
-For encrypted installation: chmod +x install-enc-uefi.sh && ./install-enc-uefi.sh
+chmod +x install-uefi.sh && ./install-uefi.sh
 
 
 
