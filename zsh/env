@@ -1,0 +1,17 @@
+export CLICOLOR=1
+export EDITOR=nvim
+export VISUAL=nvim
+export KEYTIMEOUT=1
+export TERMINAL=alacritty
+
+export GOPATH=$HOME/go
+export GO111MODULE=on
+
+# Consolidated PATH exports
+export PATH=$PATH:$HOME/.npm-global/bin:$HOME/bin:$HOME/.local/bin:/usr/local/go/bin:$HOME/go/bin
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh

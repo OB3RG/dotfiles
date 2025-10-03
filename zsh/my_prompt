@@ -1,0 +1,153 @@
+# Purification
+# by Matthieu Cneude
+# https://github.com/Phantas0s/purification
+
+# Based on:
+
+# Purity
+# by Kevin Lanni
+# https://github.com/therealklanni/purity
+# MIT License
+
+# prompt:
+# %F => color dict
+# %f => reset color
+# %~ => current path
+# %* => time
+# %n => username
+# %m => shortname host
+# %(?..) => prompt conditional - %(condition.true.false)
+
+# Display git status
+git_prompt_status() {
+  # Skip git status in large repositories for performance
+  local git_dir="$(git rev-parse --git-dir 2>/dev/null)"
+  if [[ -n "$git_dir" ]]; then
+    local git_root="$(git rev-parse --show-toplevel 2>/dev/null)"
+    local file_count="$(find "$git_root" -type f -not -path "*/.git/*" 2>/dev/null | head -n 1000 | wc -l 2>/dev/null)"
+    if [[ "$file_count" -gt 1000 ]]; then
+      # For large repos, show a simplified status
+      local branch="$(git symbolic-ref --short HEAD 2>/dev/null)"
+      if [[ -n "$branch" ]]; then
+        echo " [ $branch]"
+      fi
+      return
+    fi
+  fi
+
+  local INDEX STATUS
+
+  INDEX=$(command git status --porcelain -b 2> /dev/null)
+
+  STATUS=""
+
+  # Use ripgrep if available for better performance, otherwise fall back to grep
+  local grep_cmd="grep"
+  if command -v rg >/dev/null 2>&1; then
+    grep_cmd="rg"
+  fi
+
+  if $(echo "$INDEX" | command $grep_cmd -E '^\?\? ' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_UNTRACKED$STATUS"
+  fi
+
+  if $(echo "$INDEX" | $grep_cmd '^A  ' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_ADDED$STATUS"
+  elif $(echo "$INDEX" | $grep_cmd '^M  ' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_ADDED$STATUS"
+  elif $(echo "$INDEX" | $grep_cmd '^MM ' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_ADDED$STATUS"
+  fi
+
+  if $(echo "$INDEX" | $grep_cmd '^ M ' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
+  elif $(echo "$INDEX" | $grep_cmd '^AM ' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
+  elif $(echo "$INDEX" | $grep_cmd '^MM ' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
+  elif $(echo "$INDEX" | $grep_cmd '^ T ' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
+  fi
+
+  if $(echo "$INDEX" | $grep_cmd '^R  ' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_RENAMED$STATUS"
+  fi
+
+  if $(echo "$INDEX" | $grep_cmd '^ D ' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_DELETED$STATUS"
+  elif $(echo "$INDEX" | $grep_cmd '^D  ' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_DELETED$STATUS"
+  elif $(echo "$INDEX" | $grep_cmd '^AD ' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_DELETED$STATUS"
+  fi
+
+  if $(command git rev-parse --verify refs/stash >/dev/null 2>&1); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_STASHED$STATUS"
+  fi
+
+  if $(echo "$INDEX" | $grep_cmd '^UU ' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_UNMERGED$STATUS"
+  fi
+
+  if $(echo "$INDEX" | $grep_cmd '^## [^ ]\+ .*ahead' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_AHEAD$STATUS"
+  fi
+
+  if $(echo "$INDEX" | $grep_cmd '^## [^ ]\+ .*behind' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_BEHIND$STATUS"
+  fi
+
+  if $(echo "$INDEX" | $grep_cmd '^## [^ ]\+ .*diverged' &> /dev/null); then
+    STATUS="$ZSH_THEME_GIT_PROMPT_DIVERGED$STATUS"
+  fi
+
+  if [[ ! -z "$STATUS" ]]; then
+    echo " [ $STATUS]"
+  fi
+}
+
+
+prompt_git_branch() {
+    autoload -Uz vcs_info 
+    precmd_vcs_info() { vcs_info }
+    precmd_functions+=( precmd_vcs_info )
+    setopt prompt_subst
+    zstyle ':vcs_info:git:*' formats '%b'
+}
+
+prompt_git_info() {
+    [ ! -z "$vcs_info_msg_0_" ] && echo "$ZSH_THEME_GIT_PROMPT_PREFIX%F{white}$vcs_info_msg_0_%f$ZSH_THEME_GIT_PROMPT_SUFFIX"
+}
+
+prompt_purity_precmd() {
+    # Pass a line before each prompt
+    print -P ''
+}
+
+my_prompt_setup() {
+    # Display git branch
+
+    autoload -Uz add-zsh-hook
+    add-zsh-hook precmd prompt_purity_precmd
+
+    ZSH_THEME_GIT_PROMPT_PREFIX=" %F{red}λ%f:"
+    ZSH_THEME_GIT_PROMPT_DIRTY=""
+    ZSH_THEME_GIT_PROMPT_CLEAN=""
+
+    ZSH_THEME_GIT_PROMPT_ADDED="%F{green}+%f "
+    ZSH_THEME_GIT_PROMPT_MODIFIED="%F{blue}%f "
+    ZSH_THEME_GIT_PROMPT_DELETED="%F{red}x%f "
+    ZSH_THEME_GIT_PROMPT_RENAMED="%F{magenta}➜%f "
+    ZSH_THEME_GIT_PROMPT_UNMERGED="%F{yellow}═%f "
+    ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{white}%f "
+    ZSH_THEME_GIT_PROMPT_STASHED="%B%F{red}%f%b "
+    ZSH_THEME_GIT_PROMPT_BEHIND="%B%F{red}%f%b "
+    ZSH_THEME_GIT_PROMPT_AHEAD="%B%F{green}%f%b "
+
+    prompt_git_branch
+    RPROMPT='$(prompt_git_info) $(git_prompt_status)'
+    PROMPT=$'%F{white}%~ %B%F{blue}>%f%b '
+}
+
+my_prompt_setup
+

@@ -1,0 +1,54 @@
+#!/usr/bin/env zsh
+export DOTFILES=$HOME/.dotfiles/zsh
+export ZFILES=$HOME/.zsh
+
+source $DOTFILES/env
+source $DOTFILES/aliases
+
+eval `dircolors $DOTFILES/dircolors`
+
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
+zstyle ':completion:*' menu select
+zstyle ':completion:*' completer _complete
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
+
+autoload -U compinit && compinit -u
+zmodload -i zsh/complist
+
+unsetopt menu_complete
+unsetopt flowcontrol
+
+setopt prompt_subst
+setopt always_to_end
+setopt append_history
+setopt auto_menu
+setopt complete_in_word
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt interactivecomments
+setopt share_history
+setopt auto_cd
+setopt hist_find_no_dups
+setopt hist_reduce_blanks
+
+bindkey -v
+
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
+bindkey '^f' autosuggest-accept
+
+source /usr/share/fzf/key-bindings.zsh
+
+fpath+=($DOTFILES/zsh/my_prompt)
+source $DOTFILES/my_prompt
+
+source $ZFILES/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZFILES/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+

@@ -1,0 +1,21 @@
+unalias -a
+
+# Colorize output and some exclusions
+alias grep="grep --color=auto --exclude-dir={.git,artwork,node_modules,vendor}"
+
+# `ls` after `cd`
+function cd {
+  builtin cd "$@" && ls
+}
+
+# PID Port
+function pp {
+  ss -lptn sport = :$1 | grep -Eo 'pid=[0-9]+' | cut -c5-
+}
+
+#alias dka="docker container kill $(docker ps -q)"
+alias vim=nvim
+
+
+tmux=$(which tmux)
+alias tmux="$tmux -2"

@@ -1,0 +1,46 @@
+[format]
+  pretty = "%H %ci %ce %ae %d %s"
+
+[user]
+	email = contact@oskaroberg.com
+	name = Oskar Öberg
+
+[column]
+        ui = auto
+[branch]
+        sort = -committerdate
+[tag]
+        sort = version:refname
+[init]
+        defaultBranch = main
+[diff]
+        algorithm = histogram
+        colorMoved = plain
+        mnemonicPrefix = true
+        renames = true
+[pull]
+	rebase = true
+[push]
+        default = simple
+        autoSetupRemote = true
+        followTags = true
+[fetch]
+        prune = true
+        pruneTags = true
+        all = true
+
+[help]
+        autocorrect = prompt
+[commit]
+        verbose = true
+[rerere]
+        enabled = true
+        autoupdate = true
+[core]
+        excludesfile = ~/.gitignore
+        editor = nvim
+[rebase]
+        autoSquash = true
+        autoStash = true
+        updateRefs = true
+
