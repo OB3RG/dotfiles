@@ -23,21 +23,21 @@ cryptsetup open /dev/sda2 cryptlvm
 ### 3. Setup LVM
 ```bash
 pvcreate /dev/mapper/cryptlvm
-vgcreate MainGroup /dev/mapper/cryptlvm
-lvcreate -l 100%FREE -n root MainGroup
+vgcreate vg0 /dev/mapper/cryptlvm
+lvcreate -l 100%FREE -n root vg0
 ```
 
 ### 4. Format Filesystems
 Replace `/dev/sda` with your actual disk device:
 ```bash
 mkfs.fat -F32 /dev/sda1
-mkfs.ext4 /dev/MainGroup/root
+mkfs.ext4 /dev/vg0/root
 ```
 
 ### 5. Mount Filesystems
 Replace `/dev/sda` with your actual disk device:
 ```bash
-mount /dev/MainGroup/root /mnt
+mount /dev/vg0/root /mnt
 mount --mkdir /dev/sda1 /mnt/boot
 ```
 
