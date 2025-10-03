@@ -1,47 +1,57 @@
 # LVM Encryption Partitioning Guide
 
 ## Overview
-This guide provides the partitioning commands needed for setting up LVM encryption on Arch Linux.
+This guide provides the partitioning commands needed for setting up LVM encryption on Arch Linux following the approach from https://tomaskala.com/posts/arch-linux-with-lvm-on-luks/
 
 ## Partitioning Steps
 
 ### 1. Partition the Disk
-Replace `/dev/sda` with your actual disk device (e.g., `/dev/nvme0n1`):
 ```bash
-sgdisk --zap-all /dev/sda
-sgdisk --new=1:0:+512M --typecode=1:ef00 /dev/sda  # EFI partition
-sgdisk --new=2:0:0 --typecode=2:8309 /dev/sda      # LUKS partition
+sgdisk --zap-all /dev/nvme0n1
+sgdisk --new=1:0:+600M --typecode=1:ef00 /dev/nvme0n1   # EFI partition
+sgdisk --new=2:0:+1G --typecode=2:8300 /dev/nvme0n1     # Boot partition
+sgdisk --new=3:0:0 --typecode=3:8309 /dev/nvme0n1       # LUKS partition
 ```
 
-### 2. Encrypt the Main Partition
-Replace `/dev/sda` with your actual disk device:
+### 2. Format Filesystems
 ```bash
-cryptsetup luksFormat --pbkdf pbkdf2 /dev/sda2
-cryptsetup open /dev/sda2 cryptlvm
+mkfs.fat -F32 /dev/nvme0n1p1
+mkfs.fat -F32 /dev/nvme0n1p2
+mkfs.ext4 /dev/nvme0n1p3
 ```
 
-### 3. Setup LVM
+### 3. Encrypt the Main Partition
+```bash
+cryptsetup luksFormat /dev/nvme0n1p3
+cryptsetup open /dev/nvme0n1p3 cryptlvm
+```
+
+### 4. Setup LVM
 ```bash
 pvcreate /dev/mapper/cryptlvm
 vgcreate vg0 /dev/mapper/cryptlvm
-lvcreate -l 100%FREE -n root vg0
+lvcreate -l 100%FREE vg0 -n root
 ```
 
-### 4. Format Filesystems
-Replace `/dev/sda` with your actual disk device:
+### 5. Format LVM Volumes
 ```bash
-mkfs.fat -F32 /dev/sda1
-mkfs.ext4 /dev/vg0/root
+mkfs.ext4 /dev/mapper/vg0-root
 ```
 
-### 5. Mount Filesystems
-Replace `/dev/sda` with your actual disk device:
+### 6. Mount Filesystems
 ```bash
-mount /dev/vg0/root /mnt
-mount --mkdir /dev/sda1 /mnt/boot
+mount /dev/mapper/vg0-root /mnt
+mount --mkdir /dev/nvme0n1p1 /mnt/boot
+mount --mkdir /dev/nvme0n1p2 /mnt/boot/efi
+```
+
+### 7. Generate fstab
+```bash
+genfstab -U /mnt >> /mnt/etc/fstab
 ```
 
 ## Notes
-- Replace /dev/sda with your actual disk (e.g., /dev/nvme0n1)
 - Adjust partition sizes as needed
 - This guide should be followed before running the encryption-enabled installation script
+- The boot partition is not encrypted for performance and compatibility reasons
+- The EFI partition is also not encrypted as required by UEFI specification
