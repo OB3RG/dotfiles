@@ -37,6 +37,7 @@ echo "GRUB_ENABLE_CRYPTODISK=y" >> /etc/default/grub
 root_uuid=$(blkid -s UUID -o value /dev/nvme0n1p2)
 sed -i "s/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID=$root_uuid:cryptlvm root=\/dev\/vg0\/root\"/" /etc/default/grub
 
+mkinitcpio -P linux
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB #change the directory to /boot/efi is you mounted the EFI partition at /boot/efi
 
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -60,6 +61,5 @@ source ./hyprland.sh
 source ./dev.sh
 source ./general.sh
 
-mkinitcpio -P linux
 printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
 
