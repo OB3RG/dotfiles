@@ -26,7 +26,7 @@ pacman -S --noconfirm grub efibootmgr base-devel linux-headers xdg-user-dirs xdg
 
 # Configure GRUB for encrypted boot
 echo "GRUB_ENABLE_CRYPTODISK=y" >> /etc/default/grub
-root_uuid=$(blkid -s UUID -o value /dev/sda2)
+root_uuid=$(blkid -s UUID -o value /dev/nvme0n1p2)
 sed -i "s/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID=$root_uuid:cryptlvm root=\/dev\/MainGroup\/root\"/" /etc/default/grub
 
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB #change the directory to /boot/efi is you mounted the EFI partition at /boot/efi
