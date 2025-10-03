@@ -14,8 +14,16 @@ echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 oberg.localdomain oberg" >> /etc/hosts
 echo root:password | chpasswd
 
+# Create a key file to prevent double password entry
+dd bs=512 count=4 if=/dev/urandom of=/crypto_keyfile.bin
+chmod 000 /crypto_keyfile.bin
+
+# Add the crypto keyfile to the FILES array in mkinitcpio.conf
+sed -i 's/^FILES=()/FILES=(\/crypto_keyfile.bin)/' /etc/mkinitcpio.conf
+
 # Configure mkinitcpio for LVM on LUKS
-sed -i 's/HOOKS=(base udev autodetect modconf block filesystems keyboard fsck)/HOOKS=(base udev autodetect modconf block encrypt lvm2 filesystems keyboard fsck)/' /etc/mkinitcpio.conf
+# Follow the gist approach with proper hook ordering
+sed -i 's/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block encrypt lvm2 filesystems keyboard fsck shutdown)/' /etc/mkinitcpio.conf
 
 pacman -Syy
 pacman -S --noconfirm grub efibootmgr base-devel linux-headers xdg-user-dirs xdg-utils openssh reflector acpi acpi_call acpid \
