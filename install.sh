@@ -25,6 +25,7 @@ rm -rf \
   "$DOTCONFIG/gtk-3.0" \
   "$DOTCONFIG/gtk-4.0" \
   "$DOTCONFIG/hypr" \
+  "$DOTCONFIG/swaync" \
   "$DOTCONFIG/waybar" \
   "$HOME/.zsh" 
 
@@ -40,6 +41,7 @@ ln -s "$DOTFILES/config/tmux" "$DOTCONFIG/tmux"
 ln -s "$DOTFILES/config/gtk-3.0" "$DOTCONFIG/gtk-3.0"
 ln -s "$DOTFILES/config/gtk-4.0" "$DOTCONFIG/gtk-4.0"
 ln -s "$DOTFILES/config/hypr" "$DOTCONFIG/hypr"
+ln -s "$DOTFILES/config/swaync" "$DOTCONFIG/swaync"
 ln -s "$DOTFILES/config/waybar" "$DOTCONFIG/waybar"
 
 # Create local bin directory
