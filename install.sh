@@ -12,7 +12,7 @@ rm -rf "$DOTFILES"
 mkdir "$DOTFILES"
 cd "$DOTFILES" || exit
 
-git clone git@github.com:OB3RG/dotfiles.git $DOTFILES
+git clone -b work git@github.com:OB3RG/dotfiles.git $DOTFILES
 
 rm -rf \
   "$HOME/.ssh/config" \
