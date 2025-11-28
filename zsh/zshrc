@@ -44,7 +44,7 @@ bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 bindkey '^f' autosuggest-accept
 
-source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/shell/key-bindings.zsh
 
 fpath+=($DOTFILES/zsh/my_prompt)
 source $DOTFILES/my_prompt
