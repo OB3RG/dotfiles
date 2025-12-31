@@ -21,6 +21,7 @@ rm -rf \
   "$DOTCONFIG/alacritty" \
   "$DOTCONFIG/nvim" \
   "$DOTCONFIG/tmux" \
+  "$DOTCONFIG/opencode" \
   "$HOME/.zsh" 
 
 
@@ -31,6 +32,7 @@ ln -s "$DOTFILES/zsh/plugins" "$HOME/.zsh"
 ln -s "$DOTFILES/config/alacritty" "$DOTCONFIG/alacritty"
 ln -s "$DOTFILES/config/nvim" "$DOTCONFIG/nvim"
 ln -s "$DOTFILES/config/tmux" "$DOTCONFIG/tmux"
+ln -s "$DOTFILES/config/opencode" "$DOTCONFIG/opencode"
 
 # Create local bin directory
 mkdir -p "$HOME/.local/bin"
