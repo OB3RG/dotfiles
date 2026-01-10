@@ -2,15 +2,17 @@
 return {
 	{
 		"williamboman/mason.nvim",
-		"williamboman/mason-lspconfig.nvim",
-		{
-			"j-hui/fidget.nvim",
-			tag = "legacy",
-			event = "LspAttach",
+		dependencies = {
+			"williamboman/mason-lspconfig.nvim",
+			{
+				"j-hui/fidget.nvim",
+				tag = "legacy",
+				event = "LspAttach",
+			},
+			"folke/lazydev.nvim",
+			"RRethy/vim-illuminate",
+			"hrsh7th/cmp-nvim-lsp",
 		},
-		"folke/lazydev.nvim",
-		"RRethy/vim-illuminate",
-		"hrsh7th/cmp-nvim-lsp",
 		config = function()
 			-- Set up Mason before anything else
 			require("mason").setup()
@@ -25,18 +27,17 @@ return {
 			-- Turn on LSP status information
 			require("fidget").setup()
 
-			-- Set up cool signs for diagnostics
-			local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-			for type, icon in pairs(signs) do
-				local hl = "DiagnosticSign" .. type
-				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-			end
-
-			-- Diagnostic config
-			local config = {
+			-- Diagnostic config with signs
+			local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+			vim.diagnostic.config({
 				virtual_text = false,
 				signs = {
-					active = signs,
+					text = {
+						[vim.diagnostic.severity.ERROR] = signs.Error,
+						[vim.diagnostic.severity.WARN] = signs.Warn,
+						[vim.diagnostic.severity.HINT] = signs.Hint,
+						[vim.diagnostic.severity.INFO] = signs.Info,
+					},
 				},
 				update_in_insert = true,
 				underline = true,
@@ -49,8 +50,7 @@ return {
 					header = "",
 					prefix = "",
 				},
-			}
-			vim.diagnostic.config(config)
+			})
 
 			-- This function gets run when an LSP connects to a particular buffer.
 			local on_attach = function(client, bufnr)
@@ -83,7 +83,7 @@ return {
 			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 			-- Configure and enable Lua LSP
-			vim.lsp.config('lua_ls', {
+			vim.lsp.config("lua_ls", {
 				on_attach = on_attach,
 				capabilities = capabilities,
 				settings = {
@@ -103,10 +103,10 @@ return {
 					},
 				},
 			})
-			vim.lsp.enable('lua_ls')
+			vim.lsp.enable("lua_ls")
 
 			-- Configure and enable Go LSP
-			vim.lsp.config('gopls', {
+			vim.lsp.config("gopls", {
 				capabilities = capabilities,
 				on_attach = on_attach,
 				cmd = { "gopls" },
@@ -121,7 +121,7 @@ return {
 					},
 				},
 			})
-			vim.lsp.enable('gopls')
+			vim.lsp.enable("gopls")
 		end,
 	},
 }
