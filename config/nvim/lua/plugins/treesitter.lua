@@ -2,65 +2,34 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		build = function()
-			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
-		end,
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
-		},
+		lazy = false, -- nvim-treesitter does not support lazy-loading
+		build = ":TSUpdate",
 		config = function()
-			---@diagnostic disable-next-line: missing-fields
-			require("nvim-treesitter.configs").setup({
-				-- Add languages to be installed here that you want installed for treesitter
-				ensure_installed = { "c", "cpp", "go", "lua", "python", "rust", "vimdoc", "vim" },
+			-- Install parsers
+			require("nvim-treesitter").install({ "c", "cpp", "go", "lua", "python", "rust", "vimdoc", "vim" })
 
-				highlight = { enable = true },
-				indent = { enable = true, disable = { "python" } },
-				incremental_selection = {
-					enable = true,
-					keymaps = {
-						init_selection = "<c-space>",
-						node_incremental = "<c-space>",
-						scope_incremental = "<c-s>",
-						node_decremental = "<c-backspace>",
-					},
-				},
-				textobjects = {
-					select = {
-						enable = true,
-						lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-						keymaps = {
-							-- You can use the capture groups defined in textobjects.scm
-							["aa"] = "@parameter.outer",
-							["ia"] = "@parameter.inner",
-							["af"] = "@function.outer",
-							["if"] = "@function.inner",
-							["ac"] = "@class.outer",
-							["ic"] = "@class.inner",
-						},
-					},
-					move = {
-						enable = true,
-						set_jumps = true, -- whether to set jumps in the jumplist
-						goto_next_start = {
-							["]m"] = "@function.outer",
-							["]]"] = "@class.outer",
-						},
-						goto_next_end = {
-							["]M"] = "@function.outer",
-							["]["] = "@class.outer",
-						},
-						goto_previous_start = {
-							["[m"] = "@function.outer",
-							["[["] = "@class.outer",
-						},
-						goto_previous_end = {
-							["[M"] = "@function.outer",
-							["[]"] = "@class.outer",
-						},
-					},
-				},
+			-- Enable treesitter highlighting for all filetypes
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "*",
+				callback = function()
+					pcall(vim.treesitter.start)
+				end,
 			})
+
+			-- Enable incremental selection
+			vim.keymap.set("n", "<C-space>", function()
+				vim.cmd("normal! v")
+				require("nvim-treesitter.incremental_selection").init_selection()
+			end, { desc = "Init selection" })
+			vim.keymap.set("v", "<C-space>", function()
+				require("nvim-treesitter.incremental_selection").node_incremental()
+			end, { desc = "Increment selection" })
+			vim.keymap.set("v", "<C-s>", function()
+				require("nvim-treesitter.incremental_selection").scope_incremental()
+			end, { desc = "Scope increment" })
+			vim.keymap.set("v", "<C-backspace>", function()
+				require("nvim-treesitter.incremental_selection").node_decremental()
+			end, { desc = "Decrement selection" })
 		end,
 	},
 }

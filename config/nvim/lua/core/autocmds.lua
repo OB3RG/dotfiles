@@ -1,3 +1,4 @@
+-- Go: organize imports and format on save
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.go",
   callback = function()
