@@ -2,6 +2,8 @@
 description: >-
   Generates unit and integration tests based on acceptance criteria. Runs tests and reports failures. Can self-heal broken tests.
 mode: subagent
+model: zai-coding-plan/glm-4.7
+temperature: 0.1
 tools:
   read: true
   write: true

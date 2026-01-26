@@ -1,7 +1,7 @@
 ---
 description: Generates a new, complete Opencode sub-agent configuration file from a user's description. Use this to create new agents. Use this Proactively when the user asks you to create a new sub agent.
 mode: primary
-model: opencode/code-supernova
+model: zai-coding-plan/glm-4.7
 temperature: 0.1
 tools:
   write: true

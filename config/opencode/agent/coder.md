@@ -2,6 +2,8 @@
 description: >-
   Generates and modifies code based on a specific, detailed plan from the @planner and @architect agents.
 mode: subagent
+model: zai-coding-plan/glm-4.7
+temperature: 0.15
 tools:
   read: true
   write: true

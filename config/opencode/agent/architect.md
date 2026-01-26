@@ -2,6 +2,7 @@
 description: >-
   Defines technical constraints, selects technology, and designs the system architecture for new features. Ensures alignment with project standards.
 mode: subagent
+model: zai-coding-plan/glm-4.7
 temperature: 0.1
 tools:
   read: true

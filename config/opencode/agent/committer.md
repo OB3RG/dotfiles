@@ -2,6 +2,8 @@
 description: >-
   Creates small, atomic git commits following conventional commit standards after each logical unit of work.
 mode: subagent
+model: zai-coding-plan/glm-4.7
+temperature: 0.0
 tools:
   read: true
   write: false

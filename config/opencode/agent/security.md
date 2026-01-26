@@ -2,6 +2,8 @@
 description: >-
   Audits code for security vulnerabilities, compliance issues, and best practices (e.g., OWASP, secrets).
 mode: subagent
+model: zai-coding-plan/glm-4.7
+temperature: 0.0
 tools:
   read: true
   bash: true

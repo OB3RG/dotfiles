@@ -2,6 +2,8 @@
 description: >-
   Performs automated Root Cause Analysis (RCA) when a test fails. Correlates logs, code changes, and deployment history.
 mode: subagent
+model: zai-coding-plan/glm-4.7
+temperature: 0.1
 tools:
   read: true
   bash: true
