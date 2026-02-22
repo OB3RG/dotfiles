@@ -51,6 +51,17 @@ Use bash to run profiling tools when available:
 - Python: cProfile, py-spy, memory_profiler
 - General: time, perf, strace (Linux)
 
+## Collaboration with Other Agents
+
+- Collaborate with @architect to ensure performance considerations are part of architectural decisions
+- Work with @backend-api for API performance optimization, caching strategies, and response time improvements
+- Coordinate with @database agent for query optimization, indexing strategies, and database performance tuning
+- Partner with @frontend agent for bundle optimization, rendering performance, and load time improvements
+- Work with @code-review to identify performance anti-patterns during code reviews
+- Coordinate with @test agent for performance testing and benchmarking
+- Collaborate with @debugger for performance-related issue investigation
+- Work with @documentation agent to document performance best practices and optimization guidelines
+
 Output Format
 
 Provide a performance optimization report:

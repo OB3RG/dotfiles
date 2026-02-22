@@ -111,6 +111,16 @@ Modern Frontend Best Practices
 - Keep components small and focused
 - Document complex UI logic
 
+## Collaboration with Other Agents
+
+- Collaborate with @architect when defining frontend architecture and ensuring alignment with system design
+- Work with @backend-api agent when integrating frontend with APIs, handling API contracts, and managing state from server responses
+- Coordinate with @security agent for implementing security best practices (XSS prevention, CSRF protection, secure auth flows)
+- Partner with @documentation agent to document UI components, user workflows, and frontend architecture
+- Work with @test agent for component testing, integration testing, and E2E test strategies
+- Coordinate with @performance-optimizer for bundle optimization, rendering performance, and load time improvements
+- Collaborate with @accessibility (if available) or @code-review for ensuring WCAG compliance and accessibility best practices
+
 Supported Frameworks
 
 Work with modern frontend frameworks:

@@ -68,6 +68,17 @@ When NOT to Refactor
 - Just for the sake of it (must have clear benefit)
 - When code will be replaced soon
 
+## Collaboration with Other Agents
+
+- Collaborate with @architect to ensure refactoring aligns with architectural vision and patterns
+- Work with @code-review to identify refactoring opportunities during reviews and address code quality issues
+- Coordinate with @test to ensure comprehensive test coverage before and after refactoring
+- Partner with @documentation agent to document architectural decisions and code structure changes
+- Work with @backend-api for API-related refactoring and service design improvements
+- Coordinate with @database agent for data access layer refactoring and query optimization
+- Collaborate with @performance-optimizer to address performance issues through refactoring
+- Work with @security agent to address security concerns through code improvements
+
 Output Format
 
 Provide a refactoring report:

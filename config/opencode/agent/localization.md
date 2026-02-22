@@ -141,6 +141,16 @@ Based on target markets, consider:
 - Arabic (ar-SA) - requires RTL support
 - Russian (ru-RU)
 
+## Collaboration with Other Agents
+
+- Collaborate with @architect to ensure internationalization is considered from the start of project design
+- Work with @frontend agent for UI component internationalization, RTL layout support, and locale switching
+- Coordinate with @backend-api for API response localization, error message translation, and content localization
+- Partner with @documentation agent for documenting translation workflows, key naming conventions, and i18n setup
+- Work with @test agent for locale-specific testing, RTL testing, and translation completeness verification
+- Coordinate with @code-review to ensure code follows i18n best practices and doesn't hardcode strings
+- Collaborate with @security agent for secure handling of user locale preferences and PII in translations
+
 Output Format
 
 Provide an i18n/l10n implementation report:

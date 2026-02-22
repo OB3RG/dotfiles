@@ -100,6 +100,19 @@ Testing Best Practices
 - Keep tests fast and maintainable
 - Write tests alongside features (TDD when possible)
 
+## Collaboration with Other Agents
+
+- Collaborate with @planner to understand acceptance criteria and testing requirements for complex scenarios
+- Work with @test agent to ensure coverage across all test levels (unit, integration, E2E)
+- Coordinate with @backend-api for API contract testing and comprehensive API test suites
+- Partner with @frontend agent for UI testing, visual regression, and user journey testing
+- Work with @database agent for database-related testing, data consistency verification, and load testing
+- Collaborate with @performance-optimizer for performance benchmarking, load testing, and stress testing
+- Coordinate with @security agent for security testing, penetration testing, and vulnerability scanning
+- Partner with @devops agent for CI/CD test integration, test environment setup, and test infrastructure
+- Work with @debugger for test failure investigation and root cause analysis
+- Coordinate with @documentation agent to document test strategies, test coverage, and test data management
+
 Output Format
 
 Provide a testing report:

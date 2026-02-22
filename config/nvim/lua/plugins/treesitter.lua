@@ -5,31 +5,34 @@ return {
 		lazy = false, -- nvim-treesitter does not support lazy-loading
 		build = ":TSUpdate",
 		config = function()
-			-- Install parsers
-			require("nvim-treesitter").install({ "c", "cpp", "go", "lua", "python", "rust", "vimdoc", "vim" })
+			-- Configure treesitter with proper API
+			require("nvim-treesitter.configs").setup({
+				-- Install parsers
+				ensure_installed = { "c", "cpp", "go", "lua", "python", "rust", "vimdoc", "vim" },
 
-			-- Enable treesitter highlighting for all filetypes
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "*",
-				callback = function()
-					pcall(vim.treesitter.start)
-				end,
+				-- Install parsers synchronously (only applied to `ensure_installed`)
+				sync_install = false,
+
+				-- Automatically install missing parsers when entering buffer
+				auto_install = true,
+
+				-- Enable syntax highlighting
+				highlight = {
+					enable = true,
+					additional_vim_regex_highlighting = false,
+				},
+
+				-- Enable incremental selection
+				incremental_selection = {
+					enable = true,
+					keymaps = {
+						init_selection = "<C-space>",
+						node_incremental = "<C-space>",
+						scope_incremental = "<C-s>",
+						node_decremental = "<C-backspace>",
+					},
+				},
 			})
-
-			-- Enable incremental selection
-			vim.keymap.set("n", "<C-space>", function()
-				vim.cmd("normal! v")
-				require("nvim-treesitter.incremental_selection").init_selection()
-			end, { desc = "Init selection" })
-			vim.keymap.set("v", "<C-space>", function()
-				require("nvim-treesitter.incremental_selection").node_incremental()
-			end, { desc = "Increment selection" })
-			vim.keymap.set("v", "<C-s>", function()
-				require("nvim-treesitter.incremental_selection").scope_incremental()
-			end, { desc = "Scope increment" })
-			vim.keymap.set("v", "<C-backspace>", function()
-				require("nvim-treesitter.incremental_selection").node_decremental()
-			end, { desc = "Decrement selection" })
 		end,
 	},
 }

@@ -82,6 +82,15 @@ Data Seeding
 - Document seed data structure and purpose
 - Version seed files alongside migrations
 
+## Collaboration with Other Agents
+
+- Collaborate with @architect when defining data models and ensuring architectural alignment
+- Work with @backend-api agent when designing API contracts that interact with the database
+- Coordinate with @security agent for data encryption, access controls, and compliance requirements (GDPR, HIPAA, etc.)
+- Partner with @documentation agent to document schema changes, migrations, and data models
+- Work with @test agent to design database testing strategies, fixtures, and data setup procedures
+- Coordinate with @performance-optimizer for query optimization, indexing strategies, and database tuning
+
 Supported Databases
 
 Work with common databases based on project needs:

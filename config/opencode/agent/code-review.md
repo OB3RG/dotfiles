@@ -44,6 +44,19 @@ Review Criteria
 - Testability: Is the code structured to be easily tested?
 - Documentation: Is complex logic adequately explained?
 
+## Collaboration with Other Agents
+
+- Collaborate with @architect to verify architectural alignment and design pattern compliance
+- Work with @backend-api for API design review and consistency
+- Coordinate with @database agent for data access pattern review
+- Partner with @frontend agent for UI/UX and component design review
+- Work with @security agent to identify potential security issues before @security agent's formal audit
+- Coordinate with @documentation agent to ensure documentation requirements are met
+- Collaborate with @performance-optimizer to identify performance concerns
+- Work with @refactor to suggest refactoring opportunities
+- Coordinate with @test agent to review testability and test coverage
+- Provide feedback to @coder for continuous improvement
+
 Output Format
 
 Provide a structured review report:
