@@ -38,6 +38,7 @@ type: description
 - Use imperative mood ("add" not "added", "fix" not "fixes")
 - No period at the end
 - Lowercase after the colon
+- NEVER use "and" in the subject line - if you need to use "and", split the commit into smaller atomic commits instead
 
 ### Body (ONLY when explanation is needed)
 
@@ -76,6 +77,38 @@ fix: prevent race condition in queue processor
 The previous implementation allowed multiple workers to claim
 the same job when under high load. Added a distributed lock
 using Redis SETNX to ensure exclusive job ownership.
+```
+
+**BAD example with "and" - DON'T DO THIS:**
+```
+feat: add user validation and update login form
+```
+
+**CORRECT approach - split into two atomic commits:**
+```
+feat: add user validation
+
+```
+
+```
+feat: update login form
+
+```
+
+**Another BAD example with "and":**
+```
+fix: correct syntax error and update documentation
+```
+
+**CORRECT approach - split into two atomic commits:**
+```
+fix: correct syntax error in user model
+
+```
+
+```
+docs: update API documentation for authentication
+
 ```
 
 ## Important
