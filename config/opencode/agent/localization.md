@@ -2,7 +2,6 @@
 description: >-
   Handles i18n/l10n setup, translation file management, currency/date formatting, and RTL language support. Use proactively when internationalization or localization needs arise.
 mode: subagent
-model: zai-coding-plan/glm-4.7
 temperature: 0.1
 tools:
   read: true

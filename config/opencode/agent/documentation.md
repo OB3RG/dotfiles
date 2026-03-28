@@ -2,7 +2,6 @@
 description: >-
   Writes and maintains project documentation including README.md, API documentation, inline code comments, changelogs, and developer guides. Follows Red Hat writing guidelines for clarity, consistency, and minimalism. Use proactively when documentation needs to be created or updated.
 mode: subagent
-model: zai-coding-plan/glm-4.7
 temperature: 0.1
 tools:
   read: true

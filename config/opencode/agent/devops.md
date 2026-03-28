@@ -2,7 +2,6 @@
 description: >-
   Configures CI/CD pipelines, Docker containers, GitHub Actions workflows, environment management, and deployment automation. Use proactively for infrastructure and deployment needs.
 mode: subagent
-model: zai-coding-plan/glm-4.7
 temperature: 0.1
 tools:
   read: true

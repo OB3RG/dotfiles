@@ -2,7 +2,6 @@
 description: >-
   Reviews frontend code for responsive design, accessibility compliance, component library consistency, state management patterns, and build optimization. Use proactively for web application frontend work.
 mode: subagent
-model: zai-coding-plan/glm-4.7
 temperature: 0.1
 tools:
   read: true

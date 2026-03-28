@@ -11,7 +11,6 @@ tools:
   question: true
   webfetch: true
   websearch: true
-model: zai-coding-plan/glm-5
 ---
 
 # Purpose

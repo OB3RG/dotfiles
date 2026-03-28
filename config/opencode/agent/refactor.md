@@ -2,7 +2,6 @@
 description: >-
   Manages technical debt, eliminates code smells, modernizes legacy code, and evolves architecture. Use proactively when refactoring is needed or code quality degradation is suspected.
 mode: subagent
-model: zai-coding-plan/glm-4.7
 temperature: 0.1
 tools:
   read: true

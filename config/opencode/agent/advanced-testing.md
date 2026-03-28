@@ -2,7 +2,6 @@
 description: >-
   Handles E2E testing, performance testing, contract testing, visual regression testing, and load testing. Use proactively for advanced testing beyond unit and integration tests.
 mode: subagent
-model: zai-coding-plan/glm-4.7
 temperature: 0.1
 tools:
   read: true

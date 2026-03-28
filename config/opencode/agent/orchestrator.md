@@ -2,7 +2,6 @@
 description: >-
   The primary AI Project Manager. I interpret user goals, create high-level plans, and delegate tasks to subagents like @planner, @coder, and @test.
 mode: primary
-model: zai-coding-plan/glm-4.7
 temperature: 0.1
 tools:
   write: true

@@ -2,7 +2,6 @@
 description: >-
   Handles database schema design, migrations, query optimization, ORM configuration, and database seeding strategies. Use proactively for database-related tasks.
 mode: subagent
-model: zai-coding-plan/glm-4.7
 temperature: 0.1
 tools:
   read: true

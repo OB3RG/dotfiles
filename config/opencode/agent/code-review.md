@@ -2,7 +2,6 @@
 description: >-
   Reviews code for quality, design patterns compliance, maintainability, best practices, and readability. Use proactively for reviewing code changes before they are committed or merged.
 mode: subagent
-model: zai-coding-plan/glm-4.7
 temperature: 0.1
 tools:
   read: true

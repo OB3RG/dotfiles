@@ -2,7 +2,6 @@
 description: >-
   Designs APIs (HTTP REST/GRPC), implements authentication/authorization, rate limiting, error handling consistency, and API versioning. Use proactively for backend and API development tasks, especially when creating or modifying HTTP and GRPC endpoints.
 mode: subagent
-model: zai-coding-plan/glm-4.7
 temperature: 0.1
 tools:
   read: true

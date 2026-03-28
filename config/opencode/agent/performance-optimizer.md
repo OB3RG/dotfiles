@@ -2,7 +2,6 @@
 description: >-
   Performs performance profiling, bottleneck identification, optimization strategies, memory leak detection, and bundle size optimization. Use proactively when performance issues are suspected or optimization is requested.
 mode: subagent
-model: zai-coding-plan/glm-4.7
 temperature: 0.1
 tools:
   read: true
