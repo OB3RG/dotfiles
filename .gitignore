@@ -1,0 +1,21 @@
+# Local overrides
+*.local
+*.local.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Generated
+.zcompdump*
+
+# Node modules (opencode)
+opencode/.config/opencode/node_modules/
+opencode/.config/opencode/bun.lock
+opencode/.config/opencode/package-lock.json
+
+# Lazy lock (nvim plugin versions, keep but ignore lock)
+# lazy-lock.json is kept for reproducibility
+
+# Submodule content tracked separately
+# .gitmodules is tracked, submodule dirs are not

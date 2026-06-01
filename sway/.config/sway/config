@@ -1,0 +1,7 @@
+# Sway configuration
+# Machine-specific overrides go in ~/.config/sway/config.local (gitignored)
+
+include ~/.config/sway/config.d/*.conf
+
+# Machine-specific overrides
+include ~/.config/sway/config.local

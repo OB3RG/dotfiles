@@ -1,44 +1,29 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-if [ -z "$HOME" ]; then echo "Seems you're \$HOMEless :("; exit 1; fi
+# Install stow if missing
+command -v stow >/dev/null 2>&1 || {
+    echo "Installing GNU stow..."
+    sudo pacman -S --noconfirm stow
+}
 
-DOTCONFIG=$HOME/.config
-DOTFILES=$HOME/.dotfiles
+DOTFILES="$HOME/.dotfiles"
 
-GITCLONE="git clone --depth=1"
+# Clone if needed
+if [ ! -d "$DOTFILES/.git" ]; then
+    git clone git@github.com:OB3RG/dotfiles.git "$DOTFILES"
+fi
 
-cd "$HOME" || exit
-rm -rf "$DOTFILES"
-mkdir "$DOTFILES"
-cd "$DOTFILES" || exit
+cd "$DOTFILES"
+git submodule update --init --recursive
 
-git clone git@github.com:OB3RG/dotfiles.git $DOTFILES
+# Stow all packages
+stow gitconfig zsh alacritty nvim tmux opencode ssh scripts sway
 
-rm -rf \
-  "$HOME/.ssh/config" \
-  "$HOME/.gitconfig" \
-  "$HOME/.zshrc" \
-  "$DOTCONFIG/alacritty" \
-  "$DOTCONFIG/nvim" \
-  "$DOTCONFIG/tmux" \
-  "$DOTCONFIG/opencode" \
-  "$HOME/.zsh" 
+# Install large binaries
+./install-packages.sh
 
-
-ln -s "$DOTFILES/ssh/config" "$HOME/.ssh/config"
-ln -s "$DOTFILES/gitconfig" "$HOME/.gitconfig"
-ln -s "$DOTFILES/zsh/zshrc" "$HOME/.zshrc"
-ln -s "$DOTFILES/zsh/plugins" "$HOME/.zsh"
-ln -s "$DOTFILES/config/alacritty" "$DOTCONFIG/alacritty"
-ln -s "$DOTFILES/config/nvim" "$DOTCONFIG/nvim"
-ln -s "$DOTFILES/config/tmux" "$DOTCONFIG/tmux"
-ln -s "$DOTFILES/config/opencode" "$DOTCONFIG/opencode"
-
-# Create local bin directory
-mkdir -p "$HOME/.local/bin"
-
-cd "$HOME" || exit
-rm -f "${HOME}/.zcompdump*"
-
-echo "ENJOY! :)"
-echo "Run the installation scripts in ~/.dotfiles/scripts/ to install additional tooling"
+echo ""
+echo "Done!"
+echo "Create ~/.zshrc.local and ~/.gitconfig.local for machine-specific overrides."
+echo "For work setup: git clone <work-repo> ~/.dotfiles-work && cd ~/.dotfiles-work && stow ."
