@@ -79,6 +79,9 @@ Machine-specific tweaks (monitor layout, scaling) go in
 # Create standard home directories (Desktop, Documents, Downloads, etc.)
 xdg-user-dirs-update
 
+# Fix Nautilus for Sway (--no-desktop prevents GNOME/Mutter dependency)
+# Done automatically by install.sh
+
 # SSH agent via gnome-keyring
 systemctl --user enable gcr-ssh-agent.socket
 systemctl --user enable ssh-agent.service
