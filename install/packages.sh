@@ -25,7 +25,7 @@ pacman -S --needed --noconfirm \
   ttf-jetbrains-mono-nerd ttf-cascadia-mono-nerd ttf-iosevka-nerd otf-font-awesome \
   papirus-icon-theme qt5ct qt6ct \
   foot neovim tree-sitter tree-sitter-cli zsh fzf go tmux ripgrep podman \
-  firefox nautilus gvfs gvfs-smb \
+  firefox thunar thunar-archive-plugin thunar-volman gvfs gvfs-smb \
   libsecret gnome-keyring gcr-4 blueman obsidian syncthing flatpak btop \
   zathura zathura-pdf-mupdf mpv swayimg trash-cli \
   playerctl pamixer \
