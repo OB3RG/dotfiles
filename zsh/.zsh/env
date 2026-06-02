@@ -4,6 +4,9 @@ export VISUAL=nvim
 export KEYTIMEOUT=1
 export TERMINAL=foot
 
+# Qt theme integration (uses GTK theme via qt5ct/qt6ct)
+export QT_QPA_PLATFORMTHEME=qt5ct
+
 export GOPATH=$HOME/go
 export GO111MODULE=on
 

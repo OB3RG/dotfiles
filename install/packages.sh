@@ -11,20 +11,35 @@ set -euo pipefail
 #   desktop    - sway compositor + waybar + helpers (launcher, lock, screenshots)
 #   greeter    - greetd; the tuigreet UI is in the AUR (installed by aur.sh)
 #   fonts      - nerd fonts (sway uses JetBrainsMono) + font-awesome for waybar
+#   theme      - gruvbox GTK theme (AUR), papirus icons, qt config
 #   dev        - terminal, editor, shell and tooling
 #   apps       - browser, file manager, daily applications
+#   utils      - clipboard, media, archives, system tools
+#   security   - firewall, fail2ban
 pacman -S --needed --noconfirm \
   mesa libva-mesa-driver libva-utils \
-  sway swaybg swayidle swaylock waybar wofi mako grim slurp wl-clipboard \
+  sway swaybg swayidle swaylock waybar wofi mako grim slurp wl-clipboard cliphist \
   xdg-desktop-portal-wlr xdg-desktop-portal-gtk polkit brightnessctl \
+  kanshi \
   greetd \
   ttf-jetbrains-mono-nerd ttf-cascadia-mono-nerd ttf-iosevka-nerd otf-font-awesome \
+  papirus-icon-theme qt5ct qt6ct \
   foot neovim zsh fzf go tmux ripgrep podman \
   firefox nautilus gvfs gvfs-smb \
-  libsecret gnome-keyring gcr-4 blueman obsidian syncthing flatpak btop
+  libsecret gnome-keyring gcr-4 blueman obsidian syncthing flatpak btop \
+  zathura zathura-pdf-mupdf mpv swayimg trash-cli \
+  playerctl pamixer \
+  ufw fail2ban fastfetch timeshift
 
 # Podman
 systemctl enable podman.service
+
+# Firewall (allow SSH before enabling)
+ufw allow ssh
+systemctl enable ufw
+
+# Fail2ban
+systemctl enable fail2ban
 
 # greetd: show tuigreet on tty1 and launch sway on login.
 # Enabled later by aur.sh, once tuigreet is actually installed.

@@ -1,6 +1,11 @@
 # Sway configuration
 # Machine-specific overrides go in ~/.config/sway/config.local (gitignored)
 
+# Autostart background services
+exec kanshi
+exec mako
+exec waybar
+
 include ~/.config/sway/config.d/*.conf
 
 # Machine-specific overrides

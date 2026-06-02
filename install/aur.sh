@@ -18,7 +18,7 @@ if ! command -v paru >/dev/null 2>&1; then
 fi
 
 # AUR packages
-paru -S --needed --noconfirm greetd-tuigreet
+paru -S --needed --noconfirm greetd-tuigreet gruvbox-dark-gtk
 
 # Enable the login greeter now that tuigreet is present.
 sudo systemctl enable greetd

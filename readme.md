@@ -17,6 +17,8 @@ Each top-level directory is a stow package. The internal structure mirrors the t
 | `ssh/` | `~/.ssh/config` | SSH configuration |
 | `scripts/` | `~/.local/bin/` | Utility scripts |
 | `sway/` | `~/.config/sway/` | Wayland compositor |
+| `kanshi/` | `~/.config/kanshi/` | Display profile manager |
+| `qt/` | `~/.config/qt5ct/`, `~/.config/qt6ct/` | Qt theme configuration |
 
 ## Installation
 
@@ -49,7 +51,7 @@ sudo pacman -S stow
 git clone git@github.com:OB3RG/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 git submodule update --init --recursive
-stow gitconfig zsh foot nvim tmux opencode ssh scripts sway
+stow gitconfig zsh foot nvim tmux opencode ssh scripts sway kanshi qt
 ```
 
 ## Machine-Specific Configuration

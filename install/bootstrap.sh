@@ -27,10 +27,15 @@ EOF
 # --- Base system ---
 pacman -Syy
 pacman -S --noconfirm \
-  grub efibootmgr base-devel linux-headers xdg-user-dirs xdg-utils openssh reflector upower \
+  base base-devel linux linux-firmware intel-ucode linux-headers \
+  grub efibootmgr xdg-user-dirs xdg-utils openssh reflector upower \
+  pacman-contrib logrotate rsync cronie \
   networkmanager iw wpa_supplicant iputils network-manager-applet \
   alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack pavucontrol \
   bluez bluez-utils \
+  shared-mime-info xdg-user-dirs-gtk xdg-desktop-portal \
+  unzip p7zip \
+  avahi nss-mdns \
   sudo man-db man-pages dialog git stow
 
 # --- Bootloader ---
@@ -44,6 +49,12 @@ systemctl enable bluetooth
 systemctl enable sshd
 systemctl enable reflector.timer
 systemctl enable upower
+systemctl enable logrotate.timer
+systemctl enable avahi-daemon
+systemctl enable cronie
+
+# --- mDNS (avahi + nss-mdns) ---
+sed -i 's/^hosts:.*/hosts: files mymachines myhostname mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] dns mdns4_minimal [NOTFOUND=return] mdns4 mdns6/' /etc/nsswitch.conf
 
 # --- User ---
 useradd -m -G wheel oberg
