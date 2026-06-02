@@ -2,27 +2,28 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		lazy = false, -- nvim-treesitter does not support lazy-loading
+		branch = "main", -- new rewritten version, required for Neovim 0.12+
+		lazy = false,
 		build = ":TSUpdate",
+		dependencies = {
+			"MeanderingProgrammer/treesitter-modules.nvim", -- provides highlight, indent, fold, incremental_selection
+		},
 		config = function()
-			-- Configure treesitter with proper API
-			require("nvim-treesitter.configs").setup({
-				-- Install parsers
-				ensure_installed = { "c", "cpp", "go", "lua", "python", "rust", "vimdoc", "vim" },
+			local ensure_installed = { "c", "cpp", "go", "lua", "python", "rust", "vimdoc", "vim" }
 
-				-- Install parsers synchronously (only applied to `ensure_installed`)
-				sync_install = false,
+			-- Install missing parsers on startup
+			local installed = require("nvim-treesitter.config").get_installed()
+			local to_install = vim.iter(ensure_installed):filter(function(parser)
+				return not vim.tbl_contains(installed, parser)
+			end):totable()
+			if #to_install > 0 then
+				require("nvim-treesitter").install(to_install)
+			end
 
-				-- Automatically install missing parsers when entering buffer
-				auto_install = true,
-
-				-- Enable syntax highlighting
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = false,
-				},
-
-				-- Enable incremental selection
+			-- Enable treesitter features via treesitter-modules.nvim
+			require("treesitter-modules").setup({
+				highlight = { enable = true },
+				indent = { enable = true },
 				incremental_selection = {
 					enable = true,
 					keymaps = {

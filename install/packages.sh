@@ -24,12 +24,13 @@ pacman -S --needed --noconfirm \
   greetd \
   ttf-jetbrains-mono-nerd ttf-cascadia-mono-nerd ttf-iosevka-nerd otf-font-awesome \
   papirus-icon-theme qt5ct qt6ct \
-  foot neovim zsh fzf go tmux ripgrep podman \
+  foot neovim tree-sitter tree-sitter-cli zsh fzf go tmux ripgrep podman \
   firefox nautilus gvfs gvfs-smb \
   libsecret gnome-keyring gcr-4 blueman obsidian syncthing flatpak btop \
   zathura zathura-pdf-mupdf mpv swayimg trash-cli \
   playerctl pamixer \
-  ufw fail2ban fastfetch timeshift
+  ufw fail2ban fastfetch timeshift \
+  kubectl sops talosctl
 
 # Podman
 systemctl enable podman.service
