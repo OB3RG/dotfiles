@@ -13,7 +13,7 @@ per-machine difference is the GPU driver: the NVIDIA laptop additionally runs
 | `bootstrap.sh` | root, in chroot | install | Base system: locale, users, GRUB, networking, then `packages.sh` |
 | `packages.sh` | root | install / anytime | All packages: Sway desktop, dev tools, apps, greetd |
 | `gpu-nvidia.sh` | root | laptop only | NVIDIA drivers + `tlp` |
-| `aur.sh` | user | after first boot | Installs `paru` + `greetd-tuigreet`, enables greetd |
+| `aur.sh` | user | after first boot | Installs `paru` + `greetd-tuigreet` + `gruvbox-dark-gtk`, enables greetd |
 
 ## Fresh install
 
@@ -24,12 +24,16 @@ From the booted Arch ISO:
 pacman -Syy
 
 # 2. Partition, format, mount  — see partitioning-guide.md
+#    BTRFS is recommended (enables Timeshift snapshots)
 
 # 3. Install the base system (use amd-ucode instead of intel-ucode on AMD)
 pacstrap -K /mnt base linux linux-firmware git vim intel-ucode
 
 # 4. Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
+
+# 4b. BTRFS only: verify fstab has all subvolume mounts
+#     See partitioning-guide.md for the expected fstab layout
 
 # 5. Enter the new system
 arch-chroot /mnt
@@ -75,4 +79,39 @@ Machine-specific tweaks (monitor layout, scaling) go in
 # SSH agent via gnome-keyring
 systemctl --user enable gcr-ssh-agent.socket
 systemctl --user enable ssh-agent.service
+
+# Papirus folders: set darkcyan folder color
+papirus-folders -C darkcyan
+
+# Apply Gruvbox GTK theme (after aur.sh installs it)
+gsettings set org.gnome.desktop.interface gtk-theme 'gruvbox-dark-gtk'
+
+# UFW: add any extra rules you need (SSH is already allowed)
+# ufw allow 8080/tcp
 ```
+
+## Timeshift notes
+
+Timeshift is installed and ready.
+
+### BTRFS (recommended)
+
+If you followed the BTRFS partitioning guide, Timeshift works out of the box.
+The `@` root subvolume and `@snapshots` subvolume are already created.
+
+Create your first snapshot:
+```bash
+sudo timeshift --create --comments "Fresh install"
+```
+
+Set up automatic snapshots (e.g., daily + weekly):
+```bash
+sudo timeshift --setup-schedule --freq daily --count 7
+```
+
+Or use the GUI: `sudo timeshift-gtk`
+
+### ext4
+
+Uses rsync mode. Requires `rsync` and `cronie` (both installed by `bootstrap.sh`).
+Configure via the GUI: `sudo timeshift-gtk`
