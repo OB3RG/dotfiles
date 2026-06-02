@@ -7,7 +7,7 @@
 set -euo pipefail
 
 pacman -S --needed --noconfirm \
-  nvidia-open-dkms nvidia-utils nvidia-settings \
+  nvidia-dkms nvidia-utils nvidia-settings \
   egl-wayland
 
 # Laptop power management

@@ -15,16 +15,16 @@ set -euo pipefail
 #   apps       - browser, file manager, daily applications
 pacman -S --needed --noconfirm \
   mesa libva-mesa-driver libva-utils \
-  sway swaybg swayidle swaylock waybar fuzzel mako grim slurp wl-clipboard \
+  sway swaybg swayidle swaylock waybar wofi mako grim slurp wl-clipboard \
   xdg-desktop-portal-wlr xdg-desktop-portal-gtk polkit brightnessctl \
   greetd \
   ttf-jetbrains-mono-nerd ttf-cascadia-mono-nerd ttf-iosevka-nerd otf-font-awesome \
-  alacritty neovim zsh fzf go tmux ripgrep docker \
-  firefox thunar thunar-volman thunar-shares-plugin gvfs gvfs-smb \
+  foot neovim zsh fzf go tmux ripgrep podman \
+  firefox nautilus gvfs gvfs-smb \
   libsecret gnome-keyring gcr-4 blueman obsidian syncthing flatpak btop
 
-# Docker
-systemctl enable docker.service
+# Podman
+systemctl enable podman.service
 
 # greetd: show tuigreet on tty1 and launch sway on login.
 # Enabled later by aur.sh, once tuigreet is actually installed.

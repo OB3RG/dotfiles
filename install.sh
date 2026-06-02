@@ -18,7 +18,7 @@ cd "$DOTFILES"
 git submodule update --init --recursive
 
 # Stow all packages
-stow gitconfig zsh alacritty nvim tmux opencode ssh scripts sway
+stow gitconfig zsh foot nvim tmux opencode ssh scripts sway
 
 # Install large binaries
 ./install-packages.sh

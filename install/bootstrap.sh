@@ -27,7 +27,7 @@ EOF
 # --- Base system ---
 pacman -Syy
 pacman -S --noconfirm \
-  grub efibootmgr base-devel linux-headers xdg-user-dirs xdg-utils openssh reflector acpi acpi_call acpid \
+  grub efibootmgr base-devel linux-headers xdg-user-dirs xdg-utils openssh reflector upower \
   networkmanager iw wpa_supplicant iputils network-manager-applet \
   alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack pavucontrol \
   bluez bluez-utils \
@@ -43,7 +43,7 @@ systemctl enable NetworkManager
 systemctl enable bluetooth
 systemctl enable sshd
 systemctl enable reflector.timer
-systemctl enable acpid
+systemctl enable upower
 
 # --- User ---
 useradd -m -G wheel oberg

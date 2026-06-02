@@ -10,7 +10,7 @@ Each top-level directory is a stow package. The internal structure mirrors the t
 |---|---|---|
 | `gitconfig/` | `~/.gitconfig` | Git configuration |
 | `zsh/` | `~/.zshrc`, `~/.zsh/` | Zsh shell configuration |
-| `alacritty/` | `~/.config/alacritty/` | Terminal emulator |
+| `foot/` | `~/.config/foot/` | Terminal emulator |
 | `nvim/` | `~/.config/nvim/` | Neovim editor |
 | `tmux/` | `~/.config/tmux/` | Terminal multiplexer |
 | `opencode/` | `~/.config/opencode/` | OpenCode AI config |
@@ -49,7 +49,7 @@ sudo pacman -S stow
 git clone git@github.com:OB3RG/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 git submodule update --init --recursive
-stow gitconfig zsh alacritty nvim tmux opencode ssh scripts sway
+stow gitconfig zsh foot nvim tmux opencode ssh scripts sway
 ```
 
 ## Machine-Specific Configuration
