@@ -20,7 +20,13 @@ Each top-level directory is a stow package. The internal structure mirrors the t
 
 ## Installation
 
-### Quick setup (Arch Linux)
+### Fresh machine (from the Arch ISO)
+
+To install Arch from scratch — base system, the Sway desktop and all packages —
+follow [`install/README.md`](install/README.md). One package set covers every
+machine; the only per-machine difference is the NVIDIA driver (laptop).
+
+### Existing system (dotfiles only)
 
 ```bash
 ./install.sh
