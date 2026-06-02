@@ -90,7 +90,7 @@
   "custom/power": {
     "format": "",
     "tooltip": false,
-    "on-click": "power-menu"
+    "on-click": "$HOME/.local/bin/power-menu"
   },
 
   "tray": {
