@@ -7,21 +7,38 @@
 }
 
 window#waybar {
-  background: #282828;
+  background: transparent;
   color: #ebdbb2;
 }
 
-#workspaces {
+/* Floating pill container */
+#workspaces,
+#mode,
+#window,
+#backlight,
+#pulseaudio,
+#network,
+#memory,
+#battery,
+#clock,
+#tray {
   background: #3c3836;
-  margin: 2px 4px;
-  padding: 2px;
-  border-radius: 4px;
+  margin: 4px 2px;
+  padding: 0 10px;
+  border-radius: 6px;
+}
+
+/* Workspaces */
+#workspaces {
+  padding: 2px 4px;
+  margin-left: 0;
 }
 
 #workspaces button {
-  padding: 0 8px;
-  color: #ebdbb2;
-  border-radius: 3px;
+  padding: 0 6px;
+  color: #a89984;
+  border-radius: 4px;
+  transition: all 0.2s ease;
 }
 
 #workspaces button.focused {
@@ -30,7 +47,6 @@ window#waybar {
 }
 
 #workspaces button.active {
-  background: #504945;
   color: #ebdbb2;
 }
 
@@ -40,47 +56,96 @@ window#waybar {
 }
 
 #workspaces button:hover {
-  background: #665c54;
+  background: #504945;
   color: #ebdbb2;
 }
 
+/* Mode indicator (resize, etc) */
+#mode {
+  background: #d65d0e;
+  color: #282828;
+  font-weight: bold;
+}
+
+/* Window title */
 #window {
-  background: #3c3836;
-  margin: 2px 4px;
-  padding: 0 12px;
-  border-radius: 4px;
+  color: #bdae93;
+  font-style: italic;
 }
 
-#pulseaudio, #network, #battery, #clock {
-  background: #3c3836;
-  margin: 2px 4px;
-  padding: 0 12px;
-  border-radius: 4px;
+/* Backlight */
+#backlight {
+  color: #fabd2f;
 }
 
+/* Pulseaudio */
 #pulseaudio {
   color: #b8bb26;
 }
 
+#pulseaudio.muted {
+  color: #928374;
+}
+
+/* Network */
 #network {
   color: #83a598;
 }
 
+#network.disconnected {
+  color: #fb4934;
+}
+
+/* Memory */
+#memory {
+  color: #d3869b;
+}
+
+#memory.warning {
+  color: #fabd2f;
+}
+
+#memory.critical {
+  color: #fb4934;
+}
+
+/* Battery */
 #battery {
   color: #8ec07c;
+}
+
+#battery.charging {
+  color: #b8bb26;
+}
+
+#battery.warning {
+  color: #fabd2f;
 }
 
 #battery.critical {
   color: #fb4934;
 }
 
-#clock {
-  color: #fabd2f;
+#battery.full {
+  color: #83a598;
 }
 
+/* Clock */
+#clock {
+  color: #fabd2f;
+  font-weight: bold;
+}
+
+/* Tray */
 #tray {
-  background: #3c3836;
-  margin: 2px 4px;
-  padding: 0 8px;
-  border-radius: 4px;
+  padding: 0 6px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background: #fb4934;
 }

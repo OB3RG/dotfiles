@@ -1,10 +1,15 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 28,
+  "height": 32,
+  "margin-top": 6,
+  "margin-left": 10,
+  "margin-right": 10,
+  "spacing": 4,
   "modules-left": ["sway/workspaces", "sway/mode"],
   "modules-center": ["sway/window"],
-  "modules-right": ["pulseaudio", "network", "battery", "clock"],
+  "modules-right": ["backlight", "pulseaudio", "network", "memory", "battery", "clock", "tray"],
+
   "sway/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
@@ -25,10 +30,46 @@
       "default": ""
     }
   },
-  "clock": {
-    "format": "{:%a %Y-%m-%d %H:%M}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>"
+
+  "sway/window": {
+    "max-length": 80
   },
+
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon} {percent}%",
+    "format-icons": ["", ""],
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-"
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": " Muted",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol",
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+  },
+
+  "network": {
+    "format-wifi": " {signalStrength}%",
+    "format-ethernet": "󰈀 {ipaddr}",
+    "format-disconnected": " Disconnected",
+    "tooltip-format": "{essid} {signalStrength}%"
+  },
+
+  "memory": {
+    "interval": 5,
+    "format": " {}%",
+    "tooltip": true,
+    "tooltip-format": "Used: {used:0.1f}G / Total: {total:0.1f}G"
+  },
+
   "battery": {
     "states": {
       "good": 95,
@@ -37,21 +78,20 @@
     },
     "format": "{icon} {capacity}%",
     "format-charging": " {capacity}%",
-    "format-icons": ["", "", "", "", ""]
+    "format-full": " Full",
+    "format-icons": ["", "", "", "", ""],
+    "tooltip": true,
+    "tooltip-format": "{timeTo} {capacity}%"
   },
-  "network": {
-    "format-wifi": "  {signalStrength}%",
-    "format-ethernet": "  {ipaddr}",
-    "format-disconnected": "  Disconnected"
+
+  "clock": {
+    "format": "{:%H:%M}",
+    "tooltip-format": "<big>{:%A, %B %d %Y}</big>\n<tt>{calendar}</tt>",
+    "on-click": "cal --monday"
   },
-  "pulseaudio": {
-    "format": "{icon}  {volume}%",
-    "format-muted": "  Muted",
-    "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "default": ["", "", ""]
-    },
-    "on-click": "pavucontrol"
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 4
   }
 }
