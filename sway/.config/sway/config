@@ -4,7 +4,6 @@
 # Autostart background services
 exec kanshi
 exec mako
-exec waybar
 
 include ~/.config/sway/config.d/*.conf
 
