@@ -76,6 +76,9 @@ Machine-specific tweaks (monitor layout, scaling) go in
 ## Post-install extras
 
 ```bash
+# Create standard home directories (Desktop, Documents, Downloads, etc.)
+xdg-user-dirs-update
+
 # SSH agent via gnome-keyring
 systemctl --user enable gcr-ssh-agent.socket
 systemctl --user enable ssh-agent.service

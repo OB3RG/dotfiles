@@ -64,6 +64,9 @@ else
     echo "All symlinks verified successfully."
 fi
 
+# Create standard home directories
+xdg-user-dirs-update
+
 echo ""
 echo "Done!"
 echo "Create ~/.zshrc.local and ~/.gitconfig.local for machine-specific overrides."
