@@ -7,11 +7,11 @@
 }
 
 window#waybar {
-  background: transparent;
+  background: rgba(40, 40, 40, 0.85);
   color: #ebdbb2;
 }
 
-/* Floating pill container */
+/* Module styling */
 #workspaces,
 #mode,
 #window,
@@ -21,17 +21,15 @@ window#waybar {
 #memory,
 #battery,
 #clock,
+#custom-power,
 #tray {
   background: #3c3836;
-  margin: 4px 2px;
   padding: 0 10px;
-  border-radius: 6px;
 }
 
 /* Workspaces */
 #workspaces {
   padding: 2px 4px;
-  margin-left: 0;
 }
 
 #workspaces button {
@@ -134,6 +132,16 @@ window#waybar {
 #clock {
   color: #fabd2f;
   font-weight: bold;
+}
+
+/* Power menu */
+#custom-power {
+  color: #fb4934;
+  padding: 0 8px;
+}
+
+#custom-power:hover {
+  background: #504945;
 }
 
 /* Tray */

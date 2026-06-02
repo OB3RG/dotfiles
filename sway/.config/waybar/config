@@ -2,13 +2,10 @@
   "layer": "top",
   "position": "top",
   "height": 32,
-  "margin-top": 6,
-  "margin-left": 10,
-  "margin-right": 10,
   "spacing": 4,
   "modules-left": ["sway/workspaces", "sway/mode"],
   "modules-center": ["sway/window"],
-  "modules-right": ["backlight", "pulseaudio", "network", "memory", "battery", "clock", "tray"],
+  "modules-right": ["backlight", "pulseaudio", "network", "memory", "battery", "clock", "custom/power", "tray"],
 
   "sway/workspaces": {
     "disable-scroll": true,
@@ -88,6 +85,12 @@
     "format": "{:%H:%M}",
     "tooltip-format": "<big>{:%A, %B %d %Y}</big>\n<tt>{calendar}</tt>",
     "on-click": "cal --monday"
+  },
+
+  "custom/power": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "power-menu"
   },
 
   "tray": {

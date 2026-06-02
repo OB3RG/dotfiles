@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Power menu — wofi dmenu with lock, logout, reboot, shutdown, suspend.
+# Called by the Waybar custom/power module or the $mod+Shift+x keybinding.
+set -euo pipefail
+
+choices="󰌾 Lock\n󰗽 Logout\n Reboot\n Shutdown\n Suspend"
+
+choice=$(echo -e "$choices" | wofi --show dmenu --dmenu -p "Power: ")
+
+case "$choice" in
+  "󰌾 Lock")       swaylock ;;
+  "󰗽 Logout")     swaymsg exit ;;
+  " Reboot")     systemctl reboot ;;
+  " Shutdown")   systemctl poweroff ;;
+  " Suspend")    systemctl suspend ;;
+esac
