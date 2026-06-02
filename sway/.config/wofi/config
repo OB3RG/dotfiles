@@ -1,0 +1,14 @@
+# Wofi configuration
+--show=drun
+--display-generic
+--matching=fuzzy
+--insensitive
+--prompt=Search
+--hide-scroll
+--allow-images
+--lines=10
+--width=35%
+--height=45%
+--location=center
+--layer=overlay
+--gtk-dark
