@@ -44,7 +44,7 @@ bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 bindkey '^f' autosuggest-accept
 
-source /usr/share/fzf/shell/key-bindings.zsh
+source /usr/share/fzf/key-bindings.zsh
 
 fpath+=($ZFILES/my_prompt)
 source $ZFILES/my_prompt/my_prompt
@@ -52,7 +52,7 @@ source $ZFILES/my_prompt/my_prompt
 source $ZFILES/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZFILES/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
