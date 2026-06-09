@@ -66,7 +66,7 @@ fi
 
 # GNOME Keyring: SSH agent (unlocks at login, caches passphrase)
 systemctl --user enable --now gnome-keyring-daemon.service
-systemctl --user enable --now gnome-keyring-ssh.service
+systemctl --user enable --now gcr-ssh-agent.socket
 
 # Create standard home directories
 xdg-user-dirs-update

@@ -76,7 +76,7 @@ Machine-specific tweaks (monitor layout, scaling) go in
 ## Post-install extras
 
 ```bash
-# SSH agent via gnome-keyring — already enabled by install.sh
+# SSH agent via gnome-keyring/gcr — already enabled by install.sh
 # After first login, add your key once:
 #   ssh-add ~/.ssh/id_rsa
 # The keyring unlocks at login and caches the passphrase until reboot.
