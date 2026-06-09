@@ -67,25 +67,8 @@ fi
 # Create standard home directories
 xdg-user-dirs-update
 
-# Fix Nautilus for Sway (disable GNOME desktop integration)
-mkdir -p "$HOME/.local/share/applications"
-cat > "$HOME/.local/share/applications/org.gnome.Nautilus.desktop" <<'EOF'
-[Desktop Entry]
-Name=Files
-Comment=Access and organize files
-Exec=nautilus --no-desktop %U
-Icon=org.gnome.Nautilus
-Terminal=false
-Type=Application
-Categories=GNOME;GTK;Utility;Core;FileManager;
-MimeType=inode/directory;
-StartupNotify=true
-Actions=new-window;
-
-[Desktop Action new-window]
-Name=New Window
-Exec=nautilus --no-desktop --new-window
-EOF
+# Set Thunar as the default file manager for directories
+xdg-mime default thunar.desktop inode/directory
 
 echo ""
 echo "Done!"

@@ -3,7 +3,7 @@
 
 # Default: any monitor configuration (fallback)
 profile {
-    output eDP-1 position 0,0 mode 1920x1080@60Hz
+    output eDP-1 position 0,0 mode 1920x1080@60Hz scale 1.5
 }
 
 # Example: external monitor only (uncomment and adjust for your setup)
@@ -13,6 +13,6 @@ profile {
 
 # Example: laptop + external monitor (uncomment and adjust)
 # profile {
-#     output eDP-1 position 0,900 mode 1920x1080@60Hz
+#     output eDP-1 position 0,900 mode 1920x1080@60Hz scale 1.5
 #     output "DP-1" position 1920,0 mode 2560x1440@60Hz
 # }

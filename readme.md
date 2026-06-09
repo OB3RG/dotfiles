@@ -62,6 +62,7 @@ No branches needed. Each config sources a `.local` file if it exists (gitignored
 - `~/.gitconfig.local` — machine-specific git settings (email, etc.)
 - `~/.config/sway/config.local` — machine-specific sway settings (outputs, scaling)
 - `~/.config/opencode/opencode.local.json` — API keys and secrets
+- `~/.config/kanshi/config` — display profiles with monitor positions, modes, and scaling (managed by kanshi at boot)
 
 Example `~/.gitconfig.local`:
 ```ini
@@ -72,6 +73,14 @@ Example `~/.gitconfig.local`:
 Example `~/.zshrc.local`:
 ```zsh
 export PATH=$PATH:/some/machine/specific/path
+```
+
+Example kanshi profile with scaling (edit `~/.config/kanshi/config`):
+```
+profile {
+    output eDP-1 position 0,0 mode 1920x1080@60Hz scale 1.5
+    output "DP-1" position 1920,0 mode 2560x1440@60Hz
+}
 ```
 
 ## Work Configuration
