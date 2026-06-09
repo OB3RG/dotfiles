@@ -19,3 +19,6 @@ export NVM_DIR="$HOME/.nvm"
 
 # opencode
 export PATH=/home/oberg/.opencode/bin:$PATH
+
+# GNOME Keyring as SSH agent
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/keyring/ssh"

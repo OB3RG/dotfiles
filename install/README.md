@@ -76,15 +76,10 @@ Machine-specific tweaks (monitor layout, scaling) go in
 ## Post-install extras
 
 ```bash
-# Create standard home directories (Desktop, Documents, Downloads, etc.)
-xdg-user-dirs-update
-
-# Fix Nautilus for Sway (--no-desktop prevents GNOME/Mutter dependency)
-# Done automatically by install.sh
-
-# SSH agent via gnome-keyring
-systemctl --user enable gcr-ssh-agent.socket
-systemctl --user enable ssh-agent.service
+# SSH agent via gnome-keyring — already enabled by install.sh
+# After first login, add your key once:
+#   ssh-add ~/.ssh/id_rsa
+# The keyring unlocks at login and caches the passphrase until reboot.
 
 # Papirus folders: set darkcyan folder color
 papirus-folders -C darkcyan
