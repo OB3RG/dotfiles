@@ -5,11 +5,6 @@
             "type": "remote",
             "url": "https://mcp.context7.com/mcp",
             "enabled": true
-        },
-        "tesseract": {
-            "type": "remote",
-            "url": "http://localhost:8081/sse",
-            "enabled": true
         }
     }
 }
