@@ -5,7 +5,7 @@
   "spacing": 4,
   "modules-left": ["sway/workspaces", "sway/mode"],
   "modules-center": ["sway/window"],
-  "modules-right": ["backlight", "pulseaudio", "network", "memory", "battery", "clock", "custom/power", "tray"],
+  "modules-right": ["backlight", "pulseaudio", "network", "memory", "battery", "clock", "custom/kb-layout", "custom/power", "tray"],
 
   "sway/workspaces": {
     "disable-scroll": true,
@@ -85,6 +85,14 @@
     "format": "{:%H:%M}",
     "tooltip-format": "<big>{:%A, %B %d %Y}</big>\n<tt>{calendar}</tt>",
     "on-click": "cal --monday"
+  },
+
+  "custom/kb-layout": {
+    "exec": "$HOME/.local/bin/kb-layout.sh",
+    "return-type": "json",
+    "format": "  {}",
+    "tooltip": false,
+    "on-click": "swaymsg input type:keyboard xkb_switch_layout next"
   },
 
   "custom/power": {

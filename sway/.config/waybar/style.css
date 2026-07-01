@@ -21,6 +21,7 @@ window#waybar {
 #memory,
 #battery,
 #clock,
+#custom-kb-layout,
 #custom-power,
 #tray {
   background: #3c3836;
@@ -132,6 +133,16 @@ window#waybar {
 #clock {
   color: #fabd2f;
   font-weight: bold;
+}
+
+/* Keyboard layout */
+#custom-kb-layout {
+  color: #83a598;
+  font-weight: bold;
+}
+
+#custom-kb-layout:hover {
+  background: #504945;
 }
 
 /* Power menu */
