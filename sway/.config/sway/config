@@ -5,6 +5,10 @@
 exec kanshi
 exec mako
 
+# Start systemd graphical session (required for xdg-desktop-portal, file pickers, etc.)
+exec systemctl --user import-environment WAYLAND_DISPLAY SWAYSOCK
+exec systemctl --user start graphical-session.target
+
 include ~/.config/sway/config.d/*.conf
 
 # Machine-specific overrides
