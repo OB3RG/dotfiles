@@ -1,7 +1,7 @@
 # SSH keys (sensitive)
 ssh/.ssh/id_rsa
 ssh/.ssh/id_rsa.pub
-ssh/.ssh/known_hosts
+ssh/.ssh/known_hosts*
 
 # Local overrides
 *.local
