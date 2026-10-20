@@ -1,58 +1,34 @@
 #!/usr/bin/env bash
-# Install every package: graphics, the Sway desktop, dev tools and applications.
-# One package set for all machines — the only per-machine difference is the GPU
-# driver (NVIDIA laptop -> gpu-nvidia.sh; AMD/Intel need nothing beyond mesa).
-#
-# Run as root, either sourced from bootstrap.sh or standalone on a live system.
+# Install dev packages on Fedora (GNOME desktop is provided by the OS install).
+# Run as the normal user; sudo is used where needed.
 set -euo pipefail
 
+# RPM Fusion (free + nonfree) — media codecs, Steam, etc. Idempotent.
+sudo dnf install -y \
+  "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" \
+  "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+
 # Package groups (kept together for readability):
-#   graphics   - mesa covers AMD/Intel; NVIDIA is handled by gpu-nvidia.sh
-#   desktop    - sway compositor + waybar + helpers (launcher, lock, screenshots)
-#   greeter    - greetd; the tuigreet UI is in the AUR (installed by aur.sh)
-#   fonts      - nerd fonts (sway uses JetBrainsMono) + font-awesome for waybar
-#   theme      - gruvbox GTK theme (AUR), papirus icons, qt config
-#   dev        - terminal, editor, shell and tooling
-#   apps       - browser, file manager, daily applications
-#   utils      - clipboard, media, archives, system tools
-#   security   - firewall, fail2ban
-pacman -S --needed --noconfirm \
-  mesa libva-mesa-driver libva-utils \
-  sway swaybg swayidle swaylock waybar wofi mako grim slurp wl-clipboard cliphist \
-  xdg-desktop-portal-wlr xdg-desktop-portal-gtk polkit brightnessctl \
-  kanshi \
-  greetd \
-  ttf-jetbrains-mono-nerd ttf-cascadia-mono-nerd ttf-iosevka-nerd otf-font-awesome \
-  papirus-icon-theme qt5ct qt6ct \
-  foot neovim tree-sitter tree-sitter-cli zsh fzf go tmux ripgrep podman \
-  firefox thunar thunar-archive-plugin thunar-volman gvfs gvfs-smb xarchiver \
-  libsecret gnome-keyring gcr-4 blueman obsidian syncthing flatpak btop \
-  zathura zathura-pdf-mupdf mpv swayimg trash-cli \
-  playerctl pamixer \
-  ufw fail2ban fastfetch timeshift \
-  kubectl sops talosctl
+#   dotfiles   - stow manages the symlinks
+#   dev        - editor, shell and tooling
+#   nix        - the Nix package manager (nix-shell); daemon is socket-activated
+#   utils      - clipboard (Wayland), system monitoring
+sudo dnf install -y \
+  stow git \
+  zsh fzf ripgrep tmux neovim tree-sitter-cli \
+  golang podman gh \
+  nix \
+  wl-clipboard btop fastfetch
 
-# Podman
-systemctl enable podman.service
+# Nix multi-user daemon (socket-activated; provides nix-shell etc.)
+sudo systemctl enable --now nix-daemon.socket
 
-# Firewall (allow SSH before enabling)
-ufw allow ssh
-systemctl enable ufw
+# Optional: kubectl (Fedora ships versioned client packages)
+# sudo dnf install -y kubernetes1.35-client
+# or get the latest upstream binary: ~/.local/bin/install-kubectl.sh
 
-# Fail2ban
-systemctl enable fail2ban
-
-# greetd: show tuigreet on tty1 and launch sway on login.
-# Enabled later by aur.sh, once tuigreet is actually installed.
-install -dm755 /etc/greetd
-cat > /etc/greetd/config.toml <<'EOF'
-[terminal]
-vt = 1
-
-[default_session]
-command = "tuigreet --time --remember --cmd sway"
-user = "greeter"
-EOF
+# sops is not packaged for Fedora — install it to ~/.local/bin:
+#   ~/.local/bin/install-sops.sh
 
 echo "Packages installed."
-echo "tuigreet (the greeter UI) lives in the AUR — run install/aur.sh after first boot."
+echo "Log out and back in for the nix profile to land in PATH."

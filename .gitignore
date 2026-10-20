@@ -3,8 +3,9 @@ ssh/.ssh/id_rsa
 ssh/.ssh/id_rsa.pub
 ssh/.ssh/known_hosts*
 
-# Local overrides
-*.local
+# Local overrides (explicit names so scripts/.local/ stays trackable)
+.gitconfig.local
+.zshrc.local
 *.local.json
 
 # OS files
@@ -13,11 +14,6 @@ Thumbs.db
 
 # Generated
 .zcompdump*
-
-# Node modules (opencode)
-opencode/.config/opencode/node_modules/
-opencode/.config/opencode/bun.lock
-opencode/.config/opencode/package-lock.json
 
 # Lazy lock (nvim plugin versions, keep but ignore lock)
 # lazy-lock.json is kept for reproducibility

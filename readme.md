@@ -1,6 +1,6 @@
 # Dotfiles
 
-My personal configuration files for a complete development environment, managed with [GNU Stow](https://www.gnu.org/software/stow/).
+My personal configuration files for a Fedora development environment, managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ## Structure
 
@@ -10,49 +10,52 @@ Each top-level directory is a stow package. The internal structure mirrors the t
 |---|---|---|
 | `gitconfig/` | `~/.gitconfig` | Git configuration |
 | `zsh/` | `~/.zshrc`, `~/.zsh/` | Zsh shell configuration |
-| `foot/` | `~/.config/foot/` | Terminal emulator |
 | `nvim/` | `~/.config/nvim/` | Neovim editor |
 | `tmux/` | `~/.config/tmux/` | Terminal multiplexer |
-| `opencode/` | `~/.config/opencode/` | OpenCode AI config |
 | `ssh/` | `~/.ssh/config` | SSH configuration |
 | `scripts/` | `~/.local/bin/` | Utility scripts |
-| `sway/` | `~/.config/sway/` | Wayland compositor |
-| `kanshi/` | `~/.config/kanshi/` | Display profile manager |
-| `qt/` | `~/.config/qt5ct/`, `~/.config/qt6ct/` | Qt theme configuration |
 
 ## Installation
 
-### Fresh machine (from the Arch ISO)
+### Fresh Fedora machine
 
-To install Arch from scratch — base system, the Sway desktop and all packages —
-follow [`install/README.md`](install/README.md). One package set covers every
-machine; the only per-machine difference is the NVIDIA driver (laptop).
-
-### Existing system (dotfiles only)
+Fedora's installer handles the base system and the GNOME desktop. Then follow
+[`install/README.md`](install/README.md) — in short:
 
 ```bash
-./install.sh
+git clone https://github.com/OB3RG/dotfiles ~/.dotfiles
+cd ~/.dotfiles
+./install.sh            # stows everything, sets zsh as login shell
+./install/packages.sh   # dev packages via dnf
 ```
 
-This will:
-1. Install GNU stow if not present
-2. Clone the repo to `~/.dotfiles`
-3. Initialize git submodules (zsh plugins)
-4. Stow all packages
-5. Install large binaries (kubectl, sops, talosctl)
+### What install.sh does
+
+1. Installs GNU stow if not present
+2. Clones the repo to `~/.dotfiles` (when run standalone)
+3. Initializes git submodules (zsh plugins)
+4. Stows all packages (idempotent via `--restow`)
+5. Enables the GNOME Keyring SSH agent
+6. Changes the login shell to zsh
 
 ### Manual setup
 
 ```bash
 # Install stow
-sudo pacman -S stow
+sudo dnf install stow
 
 # Clone and stow
 git clone git@github.com:OB3RG/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 git submodule update --init --recursive
-stow gitconfig zsh foot nvim tmux opencode ssh scripts sway kanshi qt
+stow gitconfig zsh nvim tmux ssh scripts
 ```
+
+## GNOME Terminal theme
+
+Fedora's terminal app is Ptyxis. `~/.local/bin/ptyxis-theme.sh` sets its
+palette to the bundled **Gruvbox** theme so the terminal matches neovim's
+colorscheme (it follows the GNOME dark/light style automatically).
 
 ## Machine-Specific Configuration
 
@@ -60,9 +63,6 @@ No branches needed. Each config sources a `.local` file if it exists (gitignored
 
 - `~/.zshrc.local` — machine-specific zsh overrides
 - `~/.gitconfig.local` — machine-specific git settings (email, etc.)
-- `~/.config/sway/config.local` — machine-specific sway settings (outputs, scaling)
-- `~/.config/opencode/opencode.local.json` — API keys and secrets
-- `~/.config/kanshi/config` — display profiles with monitor positions, modes, and scaling (managed by kanshi at boot)
 
 Example `~/.gitconfig.local`:
 ```ini
@@ -73,14 +73,6 @@ Example `~/.gitconfig.local`:
 Example `~/.zshrc.local`:
 ```zsh
 export PATH=$PATH:/some/machine/specific/path
-```
-
-Example kanshi profile with scaling (edit `~/.config/kanshi/config`):
-```
-profile {
-    output eDP-1 position 0,0 mode 1920x1080@60Hz scale 1.5
-    output "DP-1" position 1920,0 mode 2560x1440@60Hz
-}
 ```
 
 ## Work Configuration
@@ -101,5 +93,5 @@ The work repo contains:
 ## Notable
 
 - No credentials or API keys are stored in this public repository
-- No large binaries — install scripts in `~/.local/bin/` handle downloads
+- No large binaries — install scripts in `~/.local/bin/` handle downloads (sops is not packaged for Fedora)
 - Zsh plugins are managed as git submodules, not vendored

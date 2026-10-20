@@ -2,7 +2,7 @@
 
 if [[ "$(pwd)" == $HOME/Work ]]; then
     clear
-    return
+    exit 0
 fi
 tmux new-window -dn scratch
 vim .

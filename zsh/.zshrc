@@ -44,7 +44,12 @@ bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 bindkey '^f' autosuggest-accept
 
-source /usr/share/fzf/key-bindings.zsh
+# fzf keybindings (Fedora path; fall back to Arch layout)
+if [ -f /usr/share/fzf/shell/key-bindings.zsh ]; then
+  source /usr/share/fzf/shell/key-bindings.zsh
+elif [ -f /usr/share/fzf/key-bindings.zsh ]; then
+  source /usr/share/fzf/key-bindings.zsh
+fi
 
 fpath+=($ZFILES/my_prompt)
 source $ZFILES/my_prompt/my_prompt
@@ -53,10 +58,6 @@ source $ZFILES/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZFILES/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Machine-specific overrides
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"

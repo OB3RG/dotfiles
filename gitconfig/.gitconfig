@@ -37,7 +37,6 @@
         enabled = true
         autoupdate = true
 [core]
-        excludesfile = ~/.gitignore
         editor = nvim
 [rebase]
         autoSquash = true
