@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Install stow if missing
-command -v stow >/dev/null 2>&1 || {
-    echo "Installing GNU stow..."
-    sudo dnf install -y stow
-}
+# Install stow and zsh if missing
+for pkg in stow zsh; do
+    rpm -q "$pkg" >/dev/null 2>&1 || {
+        echo "Installing $pkg..."
+        sudo dnf install -y "$pkg"
+    }
+done
 
 DOTFILES="$HOME/.dotfiles"
 
@@ -27,10 +29,15 @@ systemctl --user enable --now gcr-ssh-agent.socket
 # Create standard home directories
 xdg-user-dirs-update
 
-# Make zsh the login shell
-if [ "$SHELL" != "$(command -v zsh)" ] && command -v zsh >/dev/null 2>&1; then
-    echo "Changing login shell to zsh..."
-    chsh -s "$(command -v zsh)"
+# Make zsh the login shell (check /etc/passwd, not $SHELL)
+ZSH_PATH="$(command -v zsh)"
+CURRENT_SHELL="$(getent passwd "$USER" | cut -d: -f7)"
+if [ "$CURRENT_SHELL" != "$ZSH_PATH" ]; then
+    echo "Changing login shell from $CURRENT_SHELL to $ZSH_PATH..."
+    sudo chsh -s "$ZSH_PATH" "$USER"
+    echo "Shell changed — log out and back in for it to take effect."
+else
+    echo "Login shell is already zsh."
 fi
 
 echo ""
