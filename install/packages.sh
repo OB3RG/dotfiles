@@ -20,8 +20,28 @@ sudo dnf install -y \
   nix \
   wl-clipboard btop fastfetch
 
-# Nix multi-user daemon (socket-activated; provides nix-shell etc.)
-sudo systemctl enable --now nix-daemon.socket
+# SELinux: Fedora's policy has no file contexts for /nix, so the tree is
+# labeled default_t. Map it to var_t and relabel. Idempotent.
+if ! sudo semanage fcontext -l | grep -q '^/nix('; then
+  sudo semanage fcontext -a -t var_t '/nix(/.*)?'
+fi
+sudo restorecon -Rv /nix
+
+# Nix multi-user daemon. Use the service, NOT nix-daemon.socket: pid 1 is
+# denied creating sock_files under /nix whatever the label (no usable type
+# exists in the policy), so socket activation can't work under SELinux.
+# The daemon creates the socket itself, so run it as unconfined_service_t
+# via a drop-in; SELinux stays enforcing for everything else.
+sudo mkdir -p /etc/systemd/system/nix-daemon.service.d
+sudo tee /etc/systemd/system/nix-daemon.service.d/10-unconfined.conf >/dev/null <<'EOF'
+# Fedora's SELinux policy has no nix domain; run the daemon unconfined so it
+# can create /nix/var/nix/daemon-socket/socket and manage the store.
+[Service]
+SELinuxContext=system_u:system_r:unconfined_service_t:s0
+EOF
+sudo systemctl daemon-reload
+sudo systemctl disable --now nix-daemon.socket 2>/dev/null || true
+sudo systemctl enable --now nix-daemon.service
 
 # Optional: kubectl (Fedora ships versioned client packages)
 # sudo dnf install -y kubernetes1.35-client
