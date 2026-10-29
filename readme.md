@@ -36,7 +36,9 @@ This will:
 2. Clone the repo to `~/.dotfiles`
 3. Initialize git submodules (zsh plugins)
 4. Stow all packages
-5. Install large binaries (kubectl, sops, talosctl)
+
+kubectl, sops and talosctl come from the Arch repos (see `install/packages.sh`) —
+the `install-*.sh` scripts in `~/.local/bin/` are only needed on non-Arch machines.
 
 ### Manual setup
 
