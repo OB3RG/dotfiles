@@ -14,8 +14,8 @@ per-machine difference is the GPU driver: the NVIDIA laptop additionally runs
 | `bootstrap.sh` | root, in chroot | install | Base system: locale, users, GRUB, networking, then `packages.sh` |
 | `packages.sh` | root | install / anytime | All packages: GNOME desktop + GDM, dev tools, apps |
 | `gpu-nvidia.sh` | root | laptop only | NVIDIA drivers + `tlp` |
-| `aur.sh` | user | after first boot | Installs `paru` + `tokyonight-gtk-theme-git` |
-| `gnome-settings.sh` | user | after first boot | Dark mode, Tokyo Night theme (incl. GTK4/libadwaita), ghostty as default terminal |
+| `theme-tokyonight.sh` | user | after first boot | Tokyo Night GTK theme from GitHub (incl. GTK4/libadwaita links) — no AUR |
+| `gnome-settings.sh` | user | after first boot | Dark mode, Tokyo Night gtk-theme, ghostty as default terminal |
 
 ## Fresh install
 
@@ -65,8 +65,8 @@ git clone https://github.com/OB3RG/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 ./install.sh
 
-# 2. Install AUR bits (Tokyo Night GTK theme)
-./install/aur.sh
+# 2. Install the Tokyo Night GTK theme (straight from GitHub, no AUR)
+./install/theme-tokyonight.sh
 
 # 3. Apply GNOME settings (dark mode, Tokyo Night, ghostty as terminal)
 ./install/gnome-settings.sh
@@ -87,8 +87,10 @@ Machine-specific tweaks (monitor layout, scaling, night light) live in
 #   ssh-add ~/.ssh/id_rsa
 # The keyring unlocks at GDM login and caches the passphrase until reboot.
 
-# Tokyo Night variants (Storm/Moon, light, etc.) are in /usr/share/themes —
-# pick another one via gnome-tweaks or:
+# Tokyo Night variants (Storm/Moon color schemes, accent colors, compact) can
+# be installed by re-running the theme installer with different flags, e.g.:
+#   ~/.local/src/Tokyonight-GTK-Theme/themes/install.sh --color Dark --tweaks storm
+# Then pick it via gnome-tweaks or:
 #   gsettings set org.gnome.desktop.interface gtk-theme 'Tokyonight-Storm-Dark'
 
 # Screenshots: built into GNOME — press PrtSc for the interactive UI,
