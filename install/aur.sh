@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install AUR packages and finish greeter setup.
+# Install AUR packages (Tokyo Night GTK theme).
 # Run as the normal user (NOT root), after the first boot.
 set -euo pipefail
 
@@ -17,11 +17,8 @@ if ! command -v paru >/dev/null 2>&1; then
   rm -rf "$tmp"
 fi
 
-# AUR packages
-paru -S --needed --noconfirm greetd-tuigreet gruvbox-dark-gtk
+# AUR packages: Tokyo Night GTK theme (variants land in /usr/share/themes)
+paru -S --needed --noconfirm tokyonight-gtk-theme-git
 
-# Enable the login greeter now that tuigreet is present.
-sudo systemctl enable greetd
-
-echo "AUR packages installed and greetd enabled."
-echo "Reboot to get the tuigreet login -> sway."
+echo "AUR packages installed."
+echo "Apply the theme with: ./install/gnome-settings.sh"

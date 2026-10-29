@@ -1,0 +1,26 @@
+# Ghostty configuration
+# Docs: https://ghostty.org/docs/config
+# List available themes: ghostty +list-themes
+
+theme = TokyoNight
+font-family = JetBrainsMono Nerd Font
+font-size = 12
+
+# Window
+window-padding-x = 6
+window-padding-y = 6
+window-decoration = true
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+
+# Clipboard
+copy-on-select = clipboard
+
+# Shell integration (zsh)
+shell-integration = zsh
+shell-integration-features = cursor,sudo,title
+
+# Quick terminal / misc
+confirm-close-surface = false

@@ -18,7 +18,7 @@ cd "$DOTFILES"
 git submodule update --init --recursive
 
 # Stow all packages
-stow gitconfig zsh foot nvim tmux opencode ssh scripts sway kanshi qt
+stow gitconfig zsh ghostty nvim tmux opencode ssh scripts
 
 # Verify key symlinks and repair if needed
 verify_symlink() {
@@ -39,20 +39,16 @@ echo ""
 echo "Verifying symlinks..."
 REPAIR_NEEDED=false
 
-verify_symlink "$HOME/.config/waybar/config" || REPAIR_NEEDED=true
-verify_symlink "$HOME/.config/sway/config" || REPAIR_NEEDED=true
-verify_symlink "$HOME/.config/kanshi/config" || REPAIR_NEEDED=true
+verify_symlink "$HOME/.config/ghostty/config" || REPAIR_NEEDED=true
 
 if [ "$REPAIR_NEEDED" = true ]; then
     echo ""
     echo "Some symlinks were missing or incorrect. Re-stowing to fix..."
-    stow --restow gitconfig zsh foot nvim tmux opencode ssh scripts sway kanshi qt
+    stow --restow gitconfig zsh ghostty nvim tmux opencode ssh scripts
     echo "Re-stow complete. Verifying again..."
 
     ALL_OK=true
-    verify_symlink "$HOME/.config/waybar/config" || ALL_OK=false
-    verify_symlink "$HOME/.config/sway/config" || ALL_OK=false
-    verify_symlink "$HOME/.config/kanshi/config" || ALL_OK=false
+    verify_symlink "$HOME/.config/ghostty/config" || ALL_OK=false
 
     if [ "$ALL_OK" = true ]; then
         echo "All symlinks verified successfully."
@@ -70,9 +66,6 @@ systemctl --user enable --now gcr-ssh-agent.socket
 
 # Create standard home directories
 xdg-user-dirs-update
-
-# Set Thunar as the default file manager for directories
-xdg-mime default thunar.desktop inode/directory
 
 echo ""
 echo "Done!"

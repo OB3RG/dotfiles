@@ -2,10 +2,7 @@ export CLICOLOR=1
 export EDITOR=nvim
 export VISUAL=nvim
 export KEYTIMEOUT=1
-export TERMINAL=foot
-
-# Qt theme integration (uses GTK theme via qt5ct/qt6ct)
-export QT_QPA_PLATFORMTHEME=qt5ct
+export TERMINAL=ghostty
 
 export GOPATH=$HOME/go
 export GO111MODULE=on
@@ -17,7 +14,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Flatpak app directories (so wofi drun can find them)
+# Flatpak app directories (so launchers can find them)
 export XDG_DATA_DIRS="${XDG_DATA_DIRS:-/usr/local/share:/usr/share}:${HOME}/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share"
 
 # opencode

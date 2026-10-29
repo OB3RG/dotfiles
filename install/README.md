@@ -1,6 +1,7 @@
 # Arch Linux Install
 
-Bootstrap a fresh machine from the Arch ISO to a working **Sway** desktop.
+Bootstrap a fresh machine from the Arch ISO to a working **GNOME** desktop
+(vanilla upstream, Fedora-style curated package set, GDM login manager).
 
 There is **one** package set for every machine (`packages.sh`). The only
 per-machine difference is the GPU driver: the NVIDIA laptop additionally runs
@@ -11,9 +12,10 @@ per-machine difference is the GPU driver: the NVIDIA laptop additionally runs
 | Script | Run as | When | Does |
 |---|---|---|---|
 | `bootstrap.sh` | root, in chroot | install | Base system: locale, users, GRUB, networking, then `packages.sh` |
-| `packages.sh` | root | install / anytime | All packages: Sway desktop, dev tools, apps, greetd |
+| `packages.sh` | root | install / anytime | All packages: GNOME desktop + GDM, dev tools, apps |
 | `gpu-nvidia.sh` | root | laptop only | NVIDIA drivers + `tlp` |
-| `aur.sh` | user | after first boot | Installs `paru` + `greetd-tuigreet` + `gruvbox-dark-gtk`, enables greetd |
+| `aur.sh` | user | after first boot | Installs `paru` + `tokyonight-gtk-theme-git` |
+| `gnome-settings.sh` | user | after first boot | Dark mode, Tokyo Night theme (incl. GTK4/libadwaita), ghostty as default terminal |
 
 ## Fresh install
 
@@ -55,7 +57,7 @@ reboot
 
 ## After first boot
 
-Log in on the TTY as `oberg`, then set up the dotfiles and greeter:
+GDM starts automatically. Log in as `oberg`, then set up dotfiles and theming:
 
 ```bash
 # 1. Clone the repo to its home and stow all configs
@@ -63,15 +65,19 @@ git clone https://github.com/OB3RG/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 ./install.sh
 
-# 2. Install AUR bits (tuigreet) and enable the graphical login
+# 2. Install AUR bits (Tokyo Night GTK theme)
 ./install/aur.sh
 
-# 3. Reboot into tuigreet -> sway
+# 3. Apply GNOME settings (dark mode, Tokyo Night, ghostty as terminal)
+./install/gnome-settings.sh
+
+# 4. Re-login (or reboot) so the theme is picked up everywhere
 reboot
 ```
 
-Machine-specific tweaks (monitor layout, scaling) go in
-`~/.config/sway/config.local` — see the main [readme](../readme.md).
+Machine-specific tweaks (monitor layout, scaling, night light) live in
+**GNOME Settings > Displays** — they are stored per-machine in
+`~/.config/monitors.xml` and intentionally not stowed.
 
 ## Post-install extras
 
@@ -79,13 +85,14 @@ Machine-specific tweaks (monitor layout, scaling) go in
 # SSH agent via gnome-keyring/gcr — already enabled by install.sh
 # After first login, add your key once:
 #   ssh-add ~/.ssh/id_rsa
-# The keyring unlocks at login and caches the passphrase until reboot.
+# The keyring unlocks at GDM login and caches the passphrase until reboot.
 
-# Papirus folders: set darkcyan folder color
-papirus-folders -C darkcyan
+# Tokyo Night variants (Storm/Moon, light, etc.) are in /usr/share/themes —
+# pick another one via gnome-tweaks or:
+#   gsettings set org.gnome.desktop.interface gtk-theme 'Tokyonight-Storm-Dark'
 
-# Apply Gruvbox GTK theme (after aur.sh installs it)
-gsettings set org.gnome.desktop.interface gtk-theme 'gruvbox-dark-gtk'
+# Screenshots: built into GNOME — press PrtSc for the interactive UI,
+# or Alt+PrtSc (window) / Shift+PrtSc (area) for direct captures.
 
 # UFW: add any extra rules you need (SSH is already allowed)
 # ufw allow 8080/tcp

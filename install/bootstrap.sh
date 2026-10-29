@@ -30,7 +30,7 @@ pacman -S --noconfirm \
   base base-devel linux linux-firmware intel-ucode linux-headers \
   grub efibootmgr xdg-user-dirs xdg-utils openssh reflector upower \
   pacman-contrib logrotate rsync cronie \
-  networkmanager iw wpa_supplicant iputils network-manager-applet \
+  networkmanager iw wpa_supplicant iputils \
   alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack pavucontrol \
   bluez bluez-utils \
   shared-mime-info xdg-user-dirs-gtk xdg-desktop-portal \

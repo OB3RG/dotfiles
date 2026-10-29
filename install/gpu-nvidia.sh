@@ -17,8 +17,8 @@ systemctl enable tlp
 cat <<'EOF'
 NVIDIA drivers installed.
 
-For Sway/Wayland on NVIDIA, enable DRM kernel mode setting:
+For GNOME/Wayland on NVIDIA, enable DRM kernel mode setting:
   1. Add 'nvidia_drm.modeset=1' to GRUB_CMDLINE_LINUX_DEFAULT in /etc/default/grub
   2. grub-mkconfig -o /boot/grub/grub.cfg
-  3. Launch sway with the '--unsupported-gpu' flag if it refuses to start.
+GDM will then offer the GNOME (Wayland) session by default.
 EOF

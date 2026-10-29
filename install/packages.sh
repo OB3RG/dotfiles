@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install every package: graphics, the Sway desktop, dev tools and applications.
+# Install every package: graphics, the GNOME desktop, dev tools and applications.
 # One package set for all machines — the only per-machine difference is the GPU
 # driver (NVIDIA laptop -> gpu-nvidia.sh; AMD/Intel need nothing beyond mesa).
 #
@@ -8,28 +8,31 @@ set -euo pipefail
 
 # Package groups (kept together for readability):
 #   graphics   - mesa covers AMD/Intel; NVIDIA is handled by gpu-nvidia.sh
-#   desktop    - sway compositor + waybar + helpers (launcher, lock, screenshots)
-#   greeter    - greetd; the tuigreet UI is in the AUR (installed by aur.sh)
-#   fonts      - nerd fonts (sway uses JetBrainsMono) + font-awesome for waybar
-#   theme      - gruvbox GTK theme (AUR), papirus icons, qt config
+#   desktop    - vanilla GNOME (Fedora-like curated set) + GDM login manager
+#   portals    - screen sharing / screenshots / file choosers on Wayland
+#   keyring    - gnome-keyring + gcr SSH agent (auto-unlocks at GDM login)
+#   printing   - CUPS, used by GNOME Settings > Printers
+#   fonts      - nerd font for ghostty + noto coverage (incl. emoji)
 #   dev        - terminal, editor, shell and tooling
-#   apps       - browser, file manager, daily applications
-#   utils      - clipboard, media, archives, system tools
+#   apps       - browser, documents, media, daily applications
+#   utils      - clipboard, archives, system tools
 #   security   - firewall, fail2ban
 pacman -S --needed --noconfirm \
   mesa libva-mesa-driver libva-utils \
-  sway swaybg swayidle swaylock waybar wofi mako grim slurp wl-clipboard cliphist \
-  xdg-desktop-portal-wlr xdg-desktop-portal-gtk polkit brightnessctl \
-  kanshi \
-  greetd \
-  ttf-jetbrains-mono-nerd ttf-cascadia-mono-nerd ttf-iosevka-nerd otf-font-awesome \
-  papirus-icon-theme qt5ct qt6ct \
-  foot neovim tree-sitter tree-sitter-cli zsh fzf go tmux ripgrep podman \
-  firefox thunar thunar-archive-plugin thunar-volman gvfs gvfs-smb xarchiver \
-  libsecret gnome-keyring gcr-4 blueman obsidian syncthing flatpak btop \
-  zathura zathura-pdf-mupdf mpv swayimg trash-cli \
-  playerctl pamixer \
-  ufw fail2ban fastfetch timeshift \
+  gdm gnome-shell gnome-session gnome-settings-daemon gnome-control-center \
+  gnome-backgrounds gnome-tweaks gnome-text-editor gnome-calculator \
+  gnome-system-monitor gnome-disk-utility baobab \
+  nautilus file-roller eog evince \
+  xdg-desktop-portal-gnome xdg-desktop-portal-gtk \
+  gnome-keyring libsecret gcr-4 seahorse \
+  cups system-config-printer \
+  power-profiles-daemon \
+  ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji \
+  ghostty neovim tree-sitter tree-sitter-cli zsh fzf go tmux ripgrep podman \
+  firefox obsidian syncthing flatpak btop \
+  zathura zathura-pdf-mupdf mpv \
+  gvfs gvfs-smb wl-clipboard trash-cli fastfetch timeshift \
+  ufw fail2ban \
   kubectl sops talosctl
 
 # Podman
@@ -42,17 +45,14 @@ systemctl enable ufw
 # Fail2ban
 systemctl enable fail2ban
 
-# greetd: show tuigreet on tty1 and launch sway on login.
-# Enabled later by aur.sh, once tuigreet is actually installed.
-install -dm755 /etc/greetd
-cat > /etc/greetd/config.toml <<'EOF'
-[terminal]
-vt = 1
+# GDM login manager -> GNOME session
+systemctl enable gdm
 
-[default_session]
-command = "tuigreet --time --remember --cmd sway"
-user = "greeter"
-EOF
+# Printing
+systemctl enable cups.socket
+
+# GNOME power profiles (Performance / Balanced / Power Saver)
+systemctl enable power-profiles-daemon
 
 echo "Packages installed."
-echo "tuigreet (the greeter UI) lives in the AUR — run install/aur.sh after first boot."
+echo "GDM is enabled — reboot gives you the graphical login -> GNOME."

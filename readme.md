@@ -10,21 +10,18 @@ Each top-level directory is a stow package. The internal structure mirrors the t
 |---|---|---|
 | `gitconfig/` | `~/.gitconfig` | Git configuration |
 | `zsh/` | `~/.zshrc`, `~/.zsh/` | Zsh shell configuration |
-| `foot/` | `~/.config/foot/` | Terminal emulator |
+| `ghostty/` | `~/.config/ghostty/` | Terminal emulator |
 | `nvim/` | `~/.config/nvim/` | Neovim editor |
 | `tmux/` | `~/.config/tmux/` | Terminal multiplexer |
 | `opencode/` | `~/.config/opencode/` | OpenCode AI config |
 | `ssh/` | `~/.ssh/config` | SSH configuration |
 | `scripts/` | `~/.local/bin/` | Utility scripts |
-| `sway/` | `~/.config/sway/` | Wayland compositor |
-| `kanshi/` | `~/.config/kanshi/` | Display profile manager |
-| `qt/` | `~/.config/qt5ct/`, `~/.config/qt6ct/` | Qt theme configuration |
 
 ## Installation
 
 ### Fresh machine (from the Arch ISO)
 
-To install Arch from scratch — base system, the Sway desktop and all packages —
+To install Arch from scratch — base system, the GNOME desktop and all packages —
 follow [`install/README.md`](install/README.md). One package set covers every
 machine; the only per-machine difference is the NVIDIA driver (laptop).
 
@@ -51,7 +48,7 @@ sudo pacman -S stow
 git clone git@github.com:OB3RG/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 git submodule update --init --recursive
-stow gitconfig zsh foot nvim tmux opencode ssh scripts sway kanshi qt
+stow gitconfig zsh ghostty nvim tmux opencode ssh scripts
 ```
 
 ## Machine-Specific Configuration
@@ -60,9 +57,10 @@ No branches needed. Each config sources a `.local` file if it exists (gitignored
 
 - `~/.zshrc.local` — machine-specific zsh overrides
 - `~/.gitconfig.local` — machine-specific git settings (email, etc.)
-- `~/.config/sway/config.local` — machine-specific sway settings (outputs, scaling)
 - `~/.config/opencode/opencode.local.json` — API keys and secrets
-- `~/.config/kanshi/config` — display profiles with monitor positions, modes, and scaling (managed by kanshi at boot)
+
+Monitor layout, scaling and night light are managed per-machine in
+**GNOME Settings > Displays** (stored in `~/.config/monitors.xml`, not stowed).
 
 Example `~/.gitconfig.local`:
 ```ini
@@ -73,14 +71,6 @@ Example `~/.gitconfig.local`:
 Example `~/.zshrc.local`:
 ```zsh
 export PATH=$PATH:/some/machine/specific/path
-```
-
-Example kanshi profile with scaling (edit `~/.config/kanshi/config`):
-```
-profile {
-    output eDP-1 position 0,0 mode 1920x1080@60Hz scale 1.5
-    output "DP-1" position 1920,0 mode 2560x1440@60Hz
-}
 ```
 
 ## Work Configuration
