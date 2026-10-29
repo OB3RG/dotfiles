@@ -16,6 +16,7 @@ per-machine difference is the GPU driver: the NVIDIA laptop additionally runs
 | `gpu-nvidia.sh` | root | laptop only | NVIDIA drivers + `tlp` |
 | `theme-tokyonight.sh` | user | after first boot | Tokyo Night GTK theme from GitHub (incl. GTK4/libadwaita links) — no AUR |
 | `gnome-settings.sh` | user | after first boot | Dark mode, Tokyo Night gtk-theme, ghostty as default terminal |
+| `timeshift-setup.sh` | root | after first boot | Timeshift BTRFS config (daily x7, weekly x4) + first snapshot |
 
 ## Fresh install
 
@@ -72,7 +73,10 @@ cd ~/.dotfiles
 # 3. Apply GNOME settings (dark mode, Tokyo Night, ghostty as terminal)
 ./install/gnome-settings.sh
 
-# 4. Re-login (or reboot) so the theme is picked up everywhere
+# 4. Configure Timeshift snapshots (BTRFS installs)
+sudo ./install/timeshift-setup.sh
+
+# 5. Re-login (or reboot) so the theme is picked up everywhere
 reboot
 ```
 
@@ -103,26 +107,24 @@ Machine-specific tweaks (monitor layout, scaling, night light) live in
 
 ## Timeshift notes
 
-Timeshift is installed and ready.
+Timeshift is installed and the BTRFS layout (`@` + `@snapshots` subvolumes)
+is already Timeshift-compatible. Configure it once:
 
-### BTRFS (recommended)
-
-If you followed the BTRFS partitioning guide, Timeshift works out of the box.
-The `@` root subvolume and `@snapshots` subvolume are already created.
-
-Create your first snapshot:
 ```bash
-sudo timeshift --create --comments "Fresh install"
+sudo ./install/timeshift-setup.sh
 ```
 
-Set up automatic snapshots (e.g., daily + weekly):
-```bash
-sudo timeshift --setup-schedule --freq daily --count 7
-```
+This writes `/etc/timeshift/timeshift.json` (BTRFS mode, daily snapshots kept
+for 7 days + weekly for 4 weeks, home excluded) and takes the first snapshot.
+Scheduling runs via cronie (enabled by `bootstrap.sh`) — nothing else to do.
 
-Or use the GUI: `sudo timeshift-gtk`
-
-### ext4
-
-Uses rsync mode. Requires `rsync` and `cronie` (both installed by `bootstrap.sh`).
-Configure via the GUI: `sudo timeshift-gtk`
+Notes:
+- Snapshots cover the system (`@`), not home (`@home`) — rollbacks never
+  touch your data.
+- GUI available for browsing/restoring: `sudo timeshift-gtk`
+- ext4 installs fall back to rsync mode — configure via the GUI instead.
+- **Optional**: boot into a snapshot straight from GRUB (handy if an update
+  breaks the system): `sudo pacman -S grub-btrfs`, re-run
+  `sudo grub-mkconfig -o /boot/grub/grub.cfg`, then
+  `sudo systemctl enable --now grub-btrfsd` (use `--timeshift-auto`, see the
+  grub-btrfs docs).
