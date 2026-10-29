@@ -76,6 +76,8 @@ systemctl enable upower
 systemctl enable logrotate.timer
 systemctl enable avahi-daemon
 systemctl enable cronie
+systemctl enable fstrim.timer
+systemctl enable paccache.timer
 
 # --- mDNS (avahi + nss-mdns) ---
 sed -i 's/^hosts:.*/hosts: files mymachines myhostname mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] dns mdns4_minimal [NOTFOUND=return] mdns4 mdns6/' /etc/nsswitch.conf

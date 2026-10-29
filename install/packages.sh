@@ -26,7 +26,7 @@ pacman -S --needed --noconfirm \
   xdg-desktop-portal-gnome xdg-desktop-portal-gtk \
   gnome-keyring libsecret gcr-4 seahorse \
   cups system-config-printer \
-  power-profiles-daemon \
+  power-profiles-daemon fwupd geoclue \
   ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji \
   ghostty neovim tree-sitter tree-sitter-cli zsh fzf go tmux ripgrep podman \
   firefox obsidian syncthing flatpak btop \
@@ -53,6 +53,25 @@ systemctl enable cups.socket
 
 # GNOME power profiles (Performance / Balanced / Power Saver)
 systemctl enable power-profiles-daemon
+
+# Flathub remote (flatpak ships with no remotes on Arch)
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# Snapshot before every kernel upgrade (tagged 'daily' so it shares the
+# normal retention and gets pruned automatically)
+mkdir -p /etc/pacman.d/hooks
+cat > /etc/pacman.d/hooks/90-timeshift-pre-upgrade.hook <<'EOF'
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = linux
+
+[Action]
+Description = Creating Timeshift snapshot before kernel upgrade...
+When = PreTransaction
+Exec = /usr/bin/timeshift --create --comments "pre-upgrade" --tags D
+Depends = timeshift
+EOF
 
 # grub-btrfs: Timeshift snapshots appear in the GRUB boot menu.
 # The packaged daemon watches /.snapshots (snapper-style) — point it at

@@ -24,3 +24,9 @@ shell-integration-features = cursor,sudo,title
 
 # Quick terminal / misc
 confirm-close-surface = false
+
+# SSH note: remote servers don't know the xterm-ghostty terminfo, which can
+# break clear/colors/keys over SSH. Push it to a host once with:
+#   infocmp -x | ssh HOST -- tic -x -
+# (or uncomment the line below for maximum SSH compatibility)
+# term = xterm-256color

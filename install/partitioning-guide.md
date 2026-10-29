@@ -112,6 +112,20 @@ root is `/dev/mapper/cryptroot` on LUKS, `/dev/nvme0n1p2` on plain):
 
 If any subvolume mount is missing, add it manually before running `bootstrap.sh`.
 
+## LUKS maintenance (work machine)
+
+Two one-time safeguards worth doing right after the install:
+
+```bash
+# 1. Backup keyslot — a second passphrase in case you forget the first
+sudo cryptsetup luksAddKey /dev/nvme0n1p2
+
+# 2. Header backup — if the LUKS header corrupts, the data is unrecoverable
+#    without it. Store the file OFF the machine (USB stick, password manager).
+sudo cryptsetup luksHeaderBackup /dev/nvme0n1p2 \
+  --header-backup-file luks-header-backup.img
+```
+
 ## Notes
 
 - Do this before running `bootstrap.sh` (see [README.md](README.md)).
