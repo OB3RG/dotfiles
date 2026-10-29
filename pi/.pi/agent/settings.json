@@ -1,0 +1,5 @@
+{
+  "$schema": "https://pi.dev/schemas/settings.schema.json",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "kimi-k3"
+}

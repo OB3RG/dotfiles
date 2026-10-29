@@ -13,7 +13,7 @@ Each top-level directory is a stow package. The internal structure mirrors the t
 | `ghostty/` | `~/.config/ghostty/` | Terminal emulator |
 | `nvim/` | `~/.config/nvim/` | Neovim editor |
 | `tmux/` | `~/.config/tmux/` | Terminal multiplexer |
-| `opencode/` | `~/.config/opencode/` | OpenCode AI config |
+| `pi/` | `~/.pi/agent/` | Pi coding agent (settings, skills) |
 | `ssh/` | `~/.ssh/config` | SSH configuration |
 | `scripts/` | `~/.local/bin/` | Utility scripts |
 
@@ -50,7 +50,7 @@ sudo pacman -S stow
 git clone git@github.com:OB3RG/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 git submodule update --init --recursive
-stow gitconfig zsh ghostty nvim tmux opencode ssh scripts
+stow gitconfig zsh ghostty nvim tmux pi ssh scripts
 ```
 
 ## Machine-Specific Configuration
@@ -59,7 +59,7 @@ No branches needed. Each config sources a `.local` file if it exists (gitignored
 
 - `~/.zshrc.local` — machine-specific zsh overrides
 - `~/.gitconfig.local` — machine-specific git settings (email, etc.)
-- `~/.config/opencode/opencode.local.json` — API keys and secrets
+- `~/.pi/agent/auth.json` — API keys and secrets (created by `pi`, never stowed)
 
 Monitor layout, scaling and night light are managed per-machine in
 **GNOME Settings > Displays** (stored in `~/.config/monitors.xml`, not stowed).

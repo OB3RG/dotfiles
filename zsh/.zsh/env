@@ -17,8 +17,6 @@ export NVM_DIR="$HOME/.nvm"
 # Flatpak app directories (so launchers can find them)
 export XDG_DATA_DIRS="${XDG_DATA_DIRS:-/usr/local/share:/usr/share}:${HOME}/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share"
 
-# opencode
-export PATH=/home/oberg/.opencode/bin:$PATH
 
 # GNOME Keyring (gcr) as SSH agent
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"

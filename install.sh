@@ -18,7 +18,7 @@ cd "$DOTFILES"
 git submodule update --init --recursive
 
 # Stow all packages
-stow gitconfig zsh ghostty nvim tmux opencode ssh scripts
+stow gitconfig zsh ghostty nvim tmux pi ssh scripts
 
 # Verify key symlinks and repair if needed
 verify_symlink() {
@@ -44,7 +44,7 @@ verify_symlink "$HOME/.config/ghostty/config" || REPAIR_NEEDED=true
 if [ "$REPAIR_NEEDED" = true ]; then
     echo ""
     echo "Some symlinks were missing or incorrect. Re-stowing to fix..."
-    stow --restow gitconfig zsh ghostty nvim tmux opencode ssh scripts
+    stow --restow gitconfig zsh ghostty nvim tmux pi ssh scripts
     echo "Re-stow complete. Verifying again..."
 
     ALL_OK=true
