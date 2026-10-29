@@ -31,7 +31,7 @@ pacman -S --needed --noconfirm \
   ghostty neovim tree-sitter tree-sitter-cli zsh fzf go tmux ripgrep podman \
   firefox obsidian syncthing flatpak btop \
   zathura zathura-pdf-mupdf mpv \
-  gvfs gvfs-smb wl-clipboard trash-cli fastfetch timeshift \
+  gvfs gvfs-smb wl-clipboard trash-cli fastfetch timeshift grub-btrfs \
   ufw fail2ban \
   kubectl sops talosctl
 
@@ -53,6 +53,23 @@ systemctl enable cups.socket
 
 # GNOME power profiles (Performance / Balanced / Power Saver)
 systemctl enable power-profiles-daemon
+
+# grub-btrfs: Timeshift snapshots appear in the GRUB boot menu.
+# The packaged daemon watches /.snapshots (snapper-style) — point it at
+# Timeshift's runtime snapshot dir instead.
+mkdir -p /etc/systemd/system/grub-btrfsd.service.d
+cat > /etc/systemd/system/grub-btrfsd.service.d/override.conf <<'EOF'
+[Service]
+ExecStart=
+ExecStart=/usr/bin/grub-btrfsd --syslog --timeshift-auto
+EOF
+systemctl enable grub-btrfsd
+
+# Re-generate grub.cfg so the snapshots submenu is picked up — bootstrap.sh
+# ran grub-mkconfig before this script was sourced.
+if [ -d /boot/grub ]; then
+  grub-mkconfig -o /boot/grub/grub.cfg
+fi
 
 echo "Packages installed."
 echo "GDM is enabled — reboot gives you the graphical login -> GNOME."

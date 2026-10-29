@@ -123,8 +123,8 @@ Notes:
   touch your data.
 - GUI available for browsing/restoring: `sudo timeshift-gtk`
 - ext4 installs fall back to rsync mode — configure via the GUI instead.
-- **Optional**: boot into a snapshot straight from GRUB (handy if an update
-  breaks the system): `sudo pacman -S grub-btrfs`, re-run
-  `sudo grub-mkconfig -o /boot/grub/grub.cfg`, then
-  `sudo systemctl enable --now grub-btrfsd` (use `--timeshift-auto`, see the
-  grub-btrfs docs).
+- **GRUB integration** (installed by `packages.sh`): snapshots show up in the
+  GRUB boot menu automatically and the menu updates whenever Timeshift adds
+  or removes one — if an update breaks the system, boot the previous
+  snapshot straight from GRUB. The separate `@log`/`@cache`/`@tmp`
+  subvolumes keep `/var` writable when booting a read-only snapshot.
