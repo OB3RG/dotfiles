@@ -27,6 +27,7 @@ pacman -Syy
 
 # 2. Partition, format, mount  — see partitioning-guide.md
 #    BTRFS is recommended (enables Timeshift snapshots)
+#    LUKS encryption optional (work machine) — bootstrap.sh detects it
 
 # 3. Install the base system (use amd-ucode instead of intel-ucode on AMD)
 pacstrap -K /mnt base linux linux-firmware git vim intel-ucode

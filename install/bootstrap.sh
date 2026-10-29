@@ -36,7 +36,31 @@ pacman -S --noconfirm \
   shared-mime-info xdg-user-dirs-gtk xdg-desktop-portal \
   unzip p7zip \
   avahi nss-mdns \
-  sudo man-db man-pages dialog git stow
+  sudo man-db man-pages dialog git stow zram-generator
+
+# --- Swap on zram (Fedora-style, no swap partition) ---
+cat > /etc/systemd/zram-generator.conf <<'EOF'
+[zram0]
+zram-size = min(ram / 2, 8192)
+compression-algorithm = zstd
+EOF
+
+# --- LUKS (only when root is an unlocked LUKS device, e.g. work machines) ---
+# Detected automatically from the partition layout — see partitioning-guide.md.
+ROOT_SRC="$(findmnt -n -o SOURCE /)"
+if [[ "$ROOT_SRC" == /dev/mapper/* ]]; then
+  echo "Encrypted root detected ($ROOT_SRC) — configuring initramfs + GRUB for LUKS."
+
+  LUKS_PART="$(cryptsetup status "${ROOT_SRC#/dev/mapper/}" | awk '/device:/ {print $2}')"
+  LUKS_UUID="$(blkid -s UUID -o value "$LUKS_PART")"
+
+  # Decrypt at boot: encrypt hook must come after block, before filesystems
+  sed -i 's/^HOOKS=(\(.*\)block filesystems/HOOKS=(\1block encrypt filesystems/' /etc/mkinitcpio.conf
+  mkinitcpio -P
+
+  # Kernel parameters: unlock the container, then boot the mapped device
+  sed -i "s|^GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet cryptdevice=UUID=${LUKS_UUID}:cryptroot root=${ROOT_SRC}\"|" /etc/default/grub
+fi
 
 # --- Bootloader ---
 # NOTE: if you mounted the EFI partition at /boot/efi, change --efi-directory accordingly.
