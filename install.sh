@@ -20,11 +20,18 @@ cd "$DOTFILES"
 git submodule update --init --recursive
 
 # Stow all packages (--restow makes this idempotent)
-stow --restow gitconfig zsh nvim tmux ssh scripts
+stow --restow gitconfig zsh nvim tmux alacritty ssh scripts
 
-# GNOME Keyring: SSH agent (unlocks at login, caches passphrase)
-systemctl --user enable --now gnome-keyring-daemon.service
-systemctl --user enable --now gcr-ssh-agent.socket
+# GNOME Keyring: SSH agent (unlocks at login, caches passphrase).
+# Leave the desktop's agent alone on KDE.
+if [[ "${XDG_CURRENT_DESKTOP:-}" != *KDE* ]] \
+    && systemctl --user cat gnome-keyring-daemon.service >/dev/null 2>&1 \
+    && systemctl --user cat gcr-ssh-agent.socket >/dev/null 2>&1; then
+    systemctl --user enable --now gnome-keyring-daemon.service
+    systemctl --user enable --now gcr-ssh-agent.socket
+else
+    echo "Skipping GNOME Keyring SSH agent setup."
+fi
 
 # Create standard home directories
 xdg-user-dirs-update

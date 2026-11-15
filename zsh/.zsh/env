@@ -2,7 +2,12 @@ export CLICOLOR=1
 export EDITOR=nvim
 export VISUAL=nvim
 export KEYTIMEOUT=1
-export TERMINAL=ptyxis
+# Default terminal for scripts; override in ~/.zshrc.local if needed.
+if [[ "${XDG_CURRENT_DESKTOP:-}" == *KDE* ]]; then
+  export TERMINAL=alacritty
+else
+  export TERMINAL=ptyxis
+fi
 
 export GOPATH=$HOME/go
 export GO111MODULE=on
@@ -17,5 +22,8 @@ export NVM_DIR="$HOME/.nvm"
 # Flatpak app directories
 export XDG_DATA_DIRS="${XDG_DATA_DIRS:-/usr/local/share:/usr/share}:${HOME}/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share"
 
-# GNOME Keyring (gcr) as SSH agent
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
+# Preserve a desktop-provided SSH agent (for example on KDE). Otherwise,
+# use GNOME Keyring's gcr socket, as on Fedora Workstation.
+if [[ -z "${SSH_AUTH_SOCK:-}" && -n "${XDG_RUNTIME_DIR:-}" ]]; then
+  export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
+fi

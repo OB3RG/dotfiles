@@ -1,0 +1,57 @@
+# Alacritty configuration for Fedora/KDE.
+# Gruvbox Dark matches the Neovim colorscheme and Ptyxis theme.
+
+[general]
+live_config_reload = true
+
+[window]
+padding = { x = 8, y = 8 }
+dynamic_padding = true
+opacity = 1.0
+
+[scrolling]
+history = 10000
+
+[font]
+size = 11.0
+
+[cursor]
+style = { shape = "Block", blinking = "Off" }
+unfocused_hollow = true
+
+[mouse]
+hide_when_typing = true
+
+[colors.primary]
+background = "#282828"
+foreground = "#ebdbb2"
+bright_foreground = "#fbf1c7"
+dim_foreground = "#a89984"
+
+[colors.cursor]
+text = "#282828"
+cursor = "#ebdbb2"
+
+[colors.selection]
+text = "#ebdbb2"
+background = "#504945"
+
+[colors.normal]
+black = "#282828"
+red = "#cc241d"
+green = "#98971a"
+yellow = "#d79921"
+blue = "#458588"
+magenta = "#b16286"
+cyan = "#689d6a"
+white = "#a89984"
+
+[colors.bright]
+black = "#928374"
+red = "#fb4934"
+green = "#b8bb26"
+yellow = "#fabd2f"
+blue = "#83a598"
+magenta = "#d3869b"
+cyan = "#8ec07c"
+white = "#ebdbb2"

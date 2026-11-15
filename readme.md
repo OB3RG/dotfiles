@@ -12,6 +12,7 @@ Each top-level directory is a stow package. The internal structure mirrors the t
 | `zsh/` | `~/.zshrc`, `~/.zsh/` | Zsh shell configuration |
 | `nvim/` | `~/.config/nvim/` | Neovim editor |
 | `tmux/` | `~/.config/tmux/` | Terminal multiplexer |
+| `alacritty/` | `~/.config/alacritty/` | Alacritty terminal (Gruvbox Dark) |
 | `ssh/` | `~/.ssh/config` | SSH configuration |
 | `scripts/` | `~/.local/bin/` | Utility scripts |
 
@@ -19,8 +20,8 @@ Each top-level directory is a stow package. The internal structure mirrors the t
 
 ### Fresh Fedora machine
 
-Fedora's installer handles the base system and the GNOME desktop. Then follow
-[`install/README.md`](install/README.md) — in short:
+Fedora's installer handles the base system and your desktop (GNOME or KDE
+Plasma). Then follow [`install/README.md`](install/README.md) — in short:
 
 ```bash
 git clone https://github.com/OB3RG/dotfiles ~/.dotfiles
@@ -35,7 +36,7 @@ cd ~/.dotfiles
 2. Clones the repo to `~/.dotfiles` (when run standalone)
 3. Initializes git submodules (zsh plugins)
 4. Stows all packages (idempotent via `--restow`)
-5. Enables the GNOME Keyring SSH agent
+5. Enables the GNOME Keyring SSH agent when available (Fedora Workstation)
 6. Changes the login shell to zsh
 
 ### Manual setup
@@ -48,14 +49,21 @@ sudo dnf install stow
 git clone git@github.com:OB3RG/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 git submodule update --init --recursive
-stow gitconfig zsh nvim tmux ssh scripts
+stow gitconfig zsh nvim tmux alacritty ssh scripts
 ```
 
-## GNOME Terminal theme
+## Terminal themes
 
-Fedora's terminal app is Ptyxis. `~/.local/bin/ptyxis-theme.sh` sets its
-palette to the bundled **Gruvbox** theme so the terminal matches neovim's
-colorscheme (it follows the GNOME dark/light style automatically).
+**Alacritty (KDE):** the `alacritty` package configures Gruvbox Dark to match
+Neovim, with live config reload enabled. Edit
+`~/.config/alacritty/alacritty.toml`; changes apply without restarting.
+
+**Ptyxis (GNOME):** `~/.local/bin/ptyxis-theme.sh` selects its bundled
+**Gruvbox** palette so the terminal matches Neovim's colorscheme (it follows
+the GNOME dark/light style automatically).
+
+Scripts use Ptyxis by default on GNOME and Alacritty on KDE. Set `TERMINAL` in
+`~/.zshrc.local` to override that choice.
 
 ## Machine-Specific Configuration
 

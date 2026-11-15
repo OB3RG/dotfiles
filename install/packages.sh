@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install dev packages on Fedora (GNOME desktop is provided by the OS install).
+# Install dev packages on Fedora (the desktop is provided by the OS install).
 # Run as the normal user; sudo is used where needed.
 set -euo pipefail
 
@@ -10,12 +10,12 @@ sudo dnf install -y \
 
 # Package groups (kept together for readability):
 #   dotfiles   - stow manages the symlinks
-#   dev        - editor, shell and tooling
+#   dev        - editor, shell, terminal and tooling
 #   nix        - the Nix package manager (nix-shell); daemon is socket-activated
 #   utils      - clipboard (Wayland), system monitoring
 sudo dnf install -y \
   stow git \
-  zsh fzf ripgrep tmux neovim tree-sitter-cli \
+  zsh fzf ripgrep tmux alacritty neovim tree-sitter-cli \
   golang podman gh \
   nix \
   wl-clipboard btop fastfetch
