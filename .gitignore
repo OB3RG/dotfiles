@@ -12,6 +12,13 @@ ssh/.ssh/known_hosts*
 .DS_Store
 Thumbs.db
 
+# Pi credentials, private sessions, and machine-local service configuration
+pi-agent/.pi/agent/auth.json
+pi-agent/.pi/agent/models-store.json
+pi-agent/.pi/agent/sessions/
+pi-agent/.pi/agent/mcp.json
+pi-agent/.pi/agent/mcp-auth.json
+
 # Generated
 .zcompdump*
 

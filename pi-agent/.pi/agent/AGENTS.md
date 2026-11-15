@@ -1,0 +1,11 @@
+# Memory — llm-brain
+
+You have a persistent memory: the Obsidian vault at `~/Documents/llm-brain` ("the brain"), an agent-maintained wiki. Chat context is disposable; the brain is not. Nothing else about you persists between sessions — check it before redoing past work, write to it before good findings evaporate.
+
+## Recall
+Check memory once before work on a specific existing project, repeated workflow, or environment detail when past findings could plausibly change what you do: call `subagent` with agent `brain-recall`, `cwd` `/home/oberg/Documents/llm-brain`, and a focused task. The recall agent uses read-only JABFA MCP retrieval first, with targeted legacy search as fallback for unavailable or incomplete index coverage. Reuse that result for the session topic rather than recalling repeatedly. Do **not** recall for general-knowledge questions, isolated how-to advice, brand-new topics, or self-contained tasks. When already inside the brain, use targeted search instead of spawning recall or reading the full index.
+
+## Record
+Save durable, non-obvious, settled findings: user preferences, environment quirks, fixes that worked or failed, decisions with rationale, recurring problems, and milestone states. Batch related findings into one `brain-scribe` call at a natural milestone (`cwd` `/home/oberg/Documents/llm-brain`, task = finding plus one line of context); save during work only when context may be lost. The scribe uses JABFA for deduplication, creates new learning pages through the canary-validated `brain-create-learning` operation, and refreshes its derived index after writes. Existing-page edits remain on the direct wiki path; generic real-vault write operations remain opt-in. Do not save transient troubleshooting, unresolved guesses, passing mentions, or one-off facts. Never store credentials, tokens, passwords, or private personal data. No permission is needed; mention a save in one line. When working inside `~/Documents/llm-brain`, file directly per its schema instead of spawning the scribe.
+
+Full guidance on what is worth keeping: the `llm-memory` skill. The brain has its own schema (`~/Documents/llm-brain/AGENTS.md`), which takes precedence for wiki conventions when working there.

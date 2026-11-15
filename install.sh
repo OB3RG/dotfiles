@@ -20,7 +20,7 @@ cd "$DOTFILES"
 git submodule update --init --recursive
 
 # Stow all packages (--restow makes this idempotent)
-stow --restow gitconfig zsh nvim tmux alacritty ssh scripts
+stow --restow gitconfig zsh nvim tmux alacritty ssh scripts pi-agent
 
 # GNOME Keyring: SSH agent (unlocks at login, caches passphrase).
 # Leave the desktop's agent alone on KDE.

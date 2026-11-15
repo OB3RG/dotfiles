@@ -15,6 +15,7 @@ Each top-level directory is a stow package. The internal structure mirrors the t
 | `alacritty/` | `~/.config/alacritty/` | Alacritty terminal (Gruvbox Dark) |
 | `ssh/` | `~/.ssh/config` | SSH configuration |
 | `scripts/` | `~/.local/bin/` | Utility scripts |
+| `pi-agent/` | `~/.pi/agent/` | Agent definitions, memory workflow, prompts, and JABFA MCP wrapper |
 
 ## Installation
 
@@ -49,8 +50,26 @@ sudo dnf install stow
 git clone git@github.com:OB3RG/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 git submodule update --init --recursive
-stow gitconfig zsh nvim tmux alacritty ssh scripts
+stow gitconfig zsh nvim tmux alacritty ssh scripts pi-agent
 ```
+
+## Pi agents and memory
+
+The `pi-agent` package mirrors the user-level Pi agent configuration into `~/.pi/agent/`:
+
+- Ten reviewed agent definitions, including `brain-recall` and `brain-scribe`
+- Global memory instructions, the `llm-memory` skill, and recall/remember prompts
+- `bin/jabfa-brain-mcp.sh`, which incrementally indexes the brain and starts its local MCP server
+
+Install with `stow --restow pi-agent`. JABFA is built separately with `cargo build --release --bins` in its repository. Register the server once with:
+
+```bash
+pi mcp add jabfa --exposure direct --description 'Local read-only JABFA recall over the llm-brain vault' -- ~/.pi/agent/bin/jabfa-brain-mcp.sh
+```
+
+The wrapper defaults to `$HOME/Work/jabfa`, `$HOME/Documents/llm-brain`, and `${XDG_RUNTIME_DIR:-/tmp}/llm-brain-jabfa.sqlite3`. Override them with `JABFA_ROOT`, `BRAIN_VAULT`, `JABFA_DATABASE`, or `JABFA_BIN` when needed.
+
+No authentication files, provider model stores, sessions, or MCP service configuration are packaged. In particular, `auth.json`, `models-store.json`, `sessions/`, and `mcp.json` are deliberately excluded; configure MCP services locally.
 
 ## Terminal themes
 
